@@ -16,5 +16,15 @@ namespace IsItMyTurn
         {
             InitializeComponent();
         }
+
+        private void AddBtn_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CancelBtn_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopToRootAsync();
+        }
     }
 }

@@ -15,9 +15,41 @@
                 VerticalTextAlignment="Center"
                 HorizontalTextAlignment="Center"
                 HorizontalOptions="FillAndExpand"/>
-            <Label Text="Seek and destroy page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label 
+                Text="Leikkuiden selaus/poisto"
+                FontSize="Title"
+                VerticalOptions="Center" 
+                HorizontalOptions="CenterAndExpand"
+                Padding="20"/>
+            <StackLayout VerticalOptions="StartAndExpand">
+                <Label 
+                    Text="Tehdyt leikkuut"
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"/>
+                <ListView x:Name="listView" ItemsSource="{Binding shiftList}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Apartment}" Detail="{Binding Date}"/>
+                            <!--<ViewCell>
+                                <StackLayout BackgroundColor="#eee" Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Apartment}"/>
+                                        <Label Text="{Binding Date}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>-->
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <Button 
+                Text="Lisää uusi"
+                x:Name="AddNewBtn"
+                VerticalOptions="End"/>
+            <Button
+                Text="Takaisin etusivulle"
+                x:Name="ToMainPageBtn"
+                VerticalOptions="End"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

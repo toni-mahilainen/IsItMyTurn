@@ -15,9 +15,39 @@
                 VerticalTextAlignment="Center"
                 HorizontalTextAlignment="Center"
                 HorizontalOptions="FillAndExpand"/>
-            <Label Text="Add new page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label 
+                Text="Tehdyn leikkuun lisäys"
+                FontSize="Title"
+                VerticalOptions="Center" 
+                HorizontalOptions="CenterAndExpand"
+                Padding="20"/>
+            <StackLayout VerticalOptions="StartAndExpand">
+                <Label 
+                    Text="Valitse leikkuun suorittanut asunto"
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"/>
+                <Picker 
+                    x:Name="ApartmentPicker" 
+                    Title="Valitse asunto"
+                    HorizontalOptions="Center"/>
+                <Label 
+                    Text="Valitse suoritetun leikkuun ajankohta"
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"/>
+                <DatePicker 
+                    x:Name="DatePicker"
+                    HorizontalOptions="Center"/>
+            </StackLayout>
+            <Button 
+                Text="Lisää"
+                x:Name="AddBtn"
+                VerticalOptions="End"
+                Clicked="AddBtn_Clicked"/>
+            <Button
+                Text="Peruuta"
+                x:Name="CancelBtn"
+                VerticalOptions="End"
+                Clicked="CancelBtn_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

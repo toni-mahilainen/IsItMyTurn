@@ -28,5 +28,17 @@ namespace IsItMyTurn.Pages
 
             listView.ItemsSource = shiftList;
         }
+
+        private void AddNewBtn_Clicked(object sender, EventArgs e)
+        {
+            var addNewPage = new AddNew();
+            NavigationPage.SetHasNavigationBar(addNewPage, false);
+            Navigation.PushAsync(addNewPage);
+        }
+
+        private void ToMainPageBtn_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopToRootAsync();
+        }
     }
 }

@@ -45,11 +45,13 @@
             <Button 
                 Text="Lisää uusi"
                 x:Name="AddNewBtn"
-                VerticalOptions="End"/>
+                VerticalOptions="End"
+                Clicked="AddNewBtn_Clicked"/>
             <Button
                 Text="Takaisin etusivulle"
                 x:Name="ToMainPageBtn"
-                VerticalOptions="End"/>
+                VerticalOptions="End"
+                Clicked="ToMainPageBtn_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

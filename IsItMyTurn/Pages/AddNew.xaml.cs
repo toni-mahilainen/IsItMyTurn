@@ -24,7 +24,13 @@ namespace IsItMyTurn
 
         private void CancelBtn_Clicked(object sender, EventArgs e)
         {
-            Navigation.PopToRootAsync();
+            Navigation.PopAsync();
+            //var stack = Navigation.NavigationStack;
+
+            //var last = stack.ToArray();
+            //var lastCount = stack.Count();
+            //DisplayAlert("Debug", last[lastCount-2].ToString(), "Cancel");
+
         }
     }
 }

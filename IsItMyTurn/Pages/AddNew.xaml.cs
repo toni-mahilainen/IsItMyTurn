@@ -1,7 +1,10 @@
-﻿using IsItMyTurn.Pages;
+﻿using IsItMyTurn.Models;
+using IsItMyTurn.Pages;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,8 +19,6 @@ namespace IsItMyTurn
         public AddNew()
         {
             InitializeComponent();
-
-            
         }
 
         protected override void OnAppearing()
@@ -39,6 +40,25 @@ namespace IsItMyTurn
             {
                 ToMainPageBtn.IsVisible = true;
             }
+
+            GetApartments();
+        }
+
+        private async void GetApartments()
+        {
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync("https://isitmyturnapi.azurewebsites.net/api/apartment");
+            response.EnsureSuccessStatusCode();
+            string json = await response.Content.ReadAsStringAsync();
+            Apartment[] apartmentObjectList = JsonConvert.DeserializeObject<Apartment[]>(json);
+            List<string> apartmentList = new List<string>();
+
+            foreach (var item in apartmentObjectList)
+            {
+                apartmentList.Add(item.ApartmentName);
+            }
+
+            ApartmentPicker.ItemsSource = apartmentList;
         }
 
         private void AddBtn_Clicked(object sender, EventArgs e)

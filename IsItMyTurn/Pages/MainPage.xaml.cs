@@ -18,6 +18,10 @@ namespace IsItMyTurn
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
             GetApartmentForCurrentShift();
         }
 

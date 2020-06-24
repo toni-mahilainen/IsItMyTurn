@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IsItMyTurn.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,29 @@ namespace IsItMyTurn
         public AddNew()
         {
             InitializeComponent();
+
+            
+        }
+
+        protected override void OnAppearing()
+        {
+            // Page stack to variable
+            var pageStack = Navigation.NavigationStack;
+
+            // Previous page to variable
+            var last = pageStack.ToArray();
+            var lastCount = pageStack.Count();
+            var lastPage = last[lastCount - 2];
+
+            // If previous page is MainPage, ToMainPageBtn is not visible. Cancel-button handles the same thing
+            if (lastPage.ToString() == "IsItMyTurn.MainPage")
+            {
+                ToMainPageBtn.IsVisible = false;
+            }
+            else
+            {
+                ToMainPageBtn.IsVisible = true;
+            }
         }
 
         private void AddBtn_Clicked(object sender, EventArgs e)
@@ -25,12 +49,12 @@ namespace IsItMyTurn
         private void CancelBtn_Clicked(object sender, EventArgs e)
         {
             Navigation.PopAsync();
-            //var stack = Navigation.NavigationStack;
+        }
 
-            //var last = stack.ToArray();
-            //var lastCount = stack.Count();
-            //DisplayAlert("Debug", last[lastCount-2].ToString(), "Cancel");
-
+        private void ToMainPageBtn_Clicked(object sender, EventArgs e)
+        {
+            
+            Navigation.PopToRootAsync();
         }
     }
 }

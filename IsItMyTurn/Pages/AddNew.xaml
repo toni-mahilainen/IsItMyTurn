@@ -6,6 +6,7 @@
              mc:Ignorable="d"
              x:Class="IsItMyTurn.AddNew">
     <ContentPage.Content>
+        
         <StackLayout>
             <Label 
                 Text="Is It My Turn"
@@ -48,6 +49,12 @@
                 x:Name="CancelBtn"
                 VerticalOptions="End"
                 Clicked="CancelBtn_Clicked"/>
+            <Button
+                Text="Takaisin etusivulle"
+                x:Name="ToMainPageBtn"
+                VerticalOptions="End"
+                Clicked="ToMainPageBtn_Clicked"/>
         </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

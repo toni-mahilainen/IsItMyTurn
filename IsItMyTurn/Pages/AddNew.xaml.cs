@@ -48,21 +48,41 @@ namespace IsItMyTurn
         {
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.GetAsync("https://isitmyturnapi.azurewebsites.net/api/apartment");
-            response.EnsureSuccessStatusCode();
-            string json = await response.Content.ReadAsStringAsync();
-            Apartment[] apartmentObjectList = JsonConvert.DeserializeObject<Apartment[]>(json);
-            List<string> apartmentList = new List<string>();
 
-            foreach (var item in apartmentObjectList)
+            if (response.IsSuccessStatusCode)
             {
-                apartmentList.Add(item.ApartmentName);
-            }
+                string json = await response.Content.ReadAsStringAsync();
+                Apartment[] apartmentObjectList = JsonConvert.DeserializeObject<Apartment[]>(json);
+                Dictionary<int, string> apartmentDictionary = new Dictionary<int, string>();
+                
 
-            ApartmentPicker.ItemsSource = apartmentList;
+                foreach (var item in apartmentObjectList)
+                {
+                    apartmentDictionary.Add(item.ApartmentId, item.ApartmentName);
+                }
+
+                Apartment apartment = new Apartment()
+                {
+                    PickerItemList = apartmentDictionary.ToList()
+                };
+
+                ApartmentPicker.ItemsSource = apartment.PickerItemList;
+            }
+            else
+            {
+                await DisplayAlert("Virhe", "Tapahtui odottamaton virhe. Ole hyvä ja käynnistä sovellus uudestaan.", "OK");
+            }
         }
 
         private void AddBtn_Clicked(object sender, EventArgs e)
         {
+            Apartment apartment = new Apartment();
+            var item = apartment.SelectedItem;
+            DisplayAlert("Virhe", item.Key.ToString(), "OK");
+            //NewShift shift = new NewShift()
+            //{
+            //    ApartmentId = ApartmentPicker.SelectedItem.
+            //};
 
         }
 

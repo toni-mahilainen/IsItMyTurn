@@ -30,7 +30,10 @@
                 <Picker 
                     x:Name="ApartmentPicker" 
                     Title="Valitse asunto"
-                    HorizontalOptions="Center"/>
+                    HorizontalOptions="Center"
+                    ItemsSource="{Binding PickerItemList}"
+                    ItemDisplayBinding="{Binding Value}"
+                    SelectedItem="{Binding SelectedItem}"/>
                 <Label 
                     Text="Valitse suoritetun leikkuun ajankohta"
                     FontSize="Large"

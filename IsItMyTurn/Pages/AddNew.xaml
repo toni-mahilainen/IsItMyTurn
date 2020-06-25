@@ -31,9 +31,8 @@
                     x:Name="ApartmentPicker" 
                     Title="Valitse asunto"
                     HorizontalOptions="Center"
-                    ItemsSource="{Binding PickerItemList}"
-                    ItemDisplayBinding="{Binding Value}"
-                    SelectedItem="{Binding SelectedItem}"/>
+                    ItemsSource="{Binding ApartmentList}"
+                    ItemDisplayBinding="{Binding ApartmentName}"/>
                 <Label 
                     Text="Valitse suoritetun leikkuun ajankohta"
                     FontSize="Large"

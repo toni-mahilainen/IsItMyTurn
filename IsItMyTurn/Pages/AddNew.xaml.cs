@@ -1,5 +1,6 @@
 ﻿using IsItMyTurn.Models;
 using IsItMyTurn.Pages;
+using IsItMyTurn.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace IsItMyTurn
         public AddNew()
         {
             InitializeComponent();
+            BindingContext = new PickerViewModel();
         }
 
         protected override void OnAppearing()
@@ -41,44 +43,38 @@ namespace IsItMyTurn
                 ToMainPageBtn.IsVisible = true;
             }
 
-            GetApartments();
+            //GetApartments();
         }
 
-        private async void GetApartments()
-        {
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync("https://isitmyturnapi.azurewebsites.net/api/apartment");
+        //private async void GetApartments()
+        //{
+        //    HttpClient client = new HttpClient();
+        //    HttpResponseMessage response = await client.GetAsync("https://isitmyturnapi.azurewebsites.net/api/apartment");
 
-            if (response.IsSuccessStatusCode)
-            {
-                string json = await response.Content.ReadAsStringAsync();
-                Apartment[] apartmentObjectList = JsonConvert.DeserializeObject<Apartment[]>(json);
-                Dictionary<int, string> apartmentDictionary = new Dictionary<int, string>();
-                
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        string json = await response.Content.ReadAsStringAsync();
+        //        Apartment[] apartmentObjectList = JsonConvert.DeserializeObject<Apartment[]>(json);
+        //        Dictionary<int, string> apartmentDictionary = new Dictionary<int, string>();
 
-                foreach (var item in apartmentObjectList)
-                {
-                    apartmentDictionary.Add(item.ApartmentId, item.ApartmentName);
-                }
+        //        foreach (var item in apartmentObjectList)
+        //        {
+        //            apartmentDictionary.Add(item.ApartmentId, item.ApartmentName);
+        //        }
 
-                Apartment apartment = new Apartment()
-                {
-                    PickerItemList = apartmentDictionary.ToList()
-                };
-
-                ApartmentPicker.ItemsSource = apartment.PickerItemList;
-            }
-            else
-            {
-                await DisplayAlert("Virhe", "Tapahtui odottamaton virhe. Ole hyvä ja käynnistä sovellus uudestaan.", "OK");
-            }
-        }
+        //        ApartmentPicker.ItemsSource = apartmentDictionary.ToList();
+        //    }
+        //    else
+        //    {
+        //        await DisplayAlert("Virhe", "Tapahtui odottamaton virhe. Ole hyvä ja käynnistä sovellus uudestaan.", "OK");
+        //    }
+        //}
 
         private void AddBtn_Clicked(object sender, EventArgs e)
         {
-            Apartment apartment = new Apartment();
-            var item = apartment.SelectedItem;
-            DisplayAlert("Virhe", item.Key.ToString(), "OK");
+            //Apartment apartment = new Apartment();
+            //var item = apartment.SelectedItem;
+            //DisplayAlert("Virhe", item.Key.ToString(), "OK");
             //NewShift shift = new NewShift()
             //{
             //    ApartmentId = ApartmentPicker.SelectedItem.

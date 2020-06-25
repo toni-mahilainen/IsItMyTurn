@@ -32,7 +32,8 @@
                     Title="Valitse asunto"
                     HorizontalOptions="Center"
                     ItemsSource="{Binding ApartmentList}"
-                    ItemDisplayBinding="{Binding ApartmentName}"/>
+                    ItemDisplayBinding="{Binding ApartmentName}"
+                    SelectedItem="{Binding SelectedItem}"/>
                 <Label 
                     Text="Valitse suoritetun leikkuun ajankohta"
                     FontSize="Large"

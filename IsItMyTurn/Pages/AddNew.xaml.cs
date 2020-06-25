@@ -42,7 +42,6 @@ namespace IsItMyTurn
             {
                 ToMainPageBtn.IsVisible = true;
             }
-
             //GetApartments();
         }
 
@@ -72,6 +71,8 @@ namespace IsItMyTurn
 
         private void AddBtn_Clicked(object sender, EventArgs e)
         {
+            var item = ApartmentPicker.SelectedItem;
+            DisplayAlert("Virhe", item.ToString(), "OK");
             //Apartment apartment = new Apartment();
             //var item = apartment.SelectedItem;
             //DisplayAlert("Virhe", item.Key.ToString(), "OK");

@@ -71,8 +71,9 @@ namespace IsItMyTurn
 
         private void AddBtn_Clicked(object sender, EventArgs e)
         {
-            var item = ApartmentPicker.SelectedItem;
-            DisplayAlert("Virhe", item.ToString(), "OK");
+            PickerViewModel model = new PickerViewModel();
+            ViewModels.Apartment item = (ViewModels.Apartment)ApartmentPicker.SelectedItem;
+            DisplayAlert("Virhe", item.ApartmentId.ToString(), "OK");
             //Apartment apartment = new Apartment();
             //var item = apartment.SelectedItem;
             //DisplayAlert("Virhe", item.Key.ToString(), "OK");

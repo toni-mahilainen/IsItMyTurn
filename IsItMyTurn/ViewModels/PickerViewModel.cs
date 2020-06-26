@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace IsItMyTurn.ViewModels
 {
-    public class PickerViewModel
+    public class PickerViewModel : INotifyPropertyChanged
     {
         public List<Apartment> ApartmentList { get; set; }
         public PickerViewModel()
@@ -36,12 +37,24 @@ namespace IsItMyTurn.ViewModels
             return apartments;
         }
 
-        private KeyValuePair<int, string> _selectedItem;
 
-        public KeyValuePair<int, string> SelectedItem
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void OnPropertyChanged([CallerMemberName] string name = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        private Apartment _selectedItem;
+
+        public Apartment SelectedItem
         {
             get => _selectedItem;
-            set => _selectedItem = value;
+            set 
+            { 
+                _selectedItem = value;
+                OnPropertyChanged();
+            }
         }
     }
 

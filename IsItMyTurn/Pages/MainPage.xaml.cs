@@ -26,33 +26,6 @@ namespace IsItMyTurn
             GetApartmentForCurrentShift();
         }
 
-        protected override void OnDisappearing()
-        {
-            GetApartments();
-        }
-
-        private async void GetApartments()
-        {
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync("https://isitmyturnapi.azurewebsites.net/api/apartment");
-
-            if (response.IsSuccessStatusCode)
-            {
-                string json = await response.Content.ReadAsStringAsync();
-                Apartment[] apartmentObjectList = JsonConvert.DeserializeObject<Apartment[]>(json);
-                Dictionary<int, string> apartmentDictionary = new Dictionary<int, string>();
-
-                foreach (var item in apartmentObjectList)
-                {
-                    apartmentDictionary.Add(item.ApartmentId, item.ApartmentName);
-                }
-                Apartment apartment = new Apartment()
-                {
-                    PickerItemList = apartmentDictionary.ToList()
-                };
-            }
-        }
-
         private async void GetApartmentForCurrentShift()
         {
             HttpClient client = new HttpClient();

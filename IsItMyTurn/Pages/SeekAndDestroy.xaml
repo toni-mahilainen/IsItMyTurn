@@ -26,21 +26,30 @@
                     Text="Tehdyt leikkuut"
                     FontSize="Large"
                     HorizontalOptions="CenterAndExpand"/>
-                <ListView x:Name="listView" ItemsSource="{Binding shiftList}">
+                <ListView x:Name="listView" ItemsSource="{Binding CompletedShiftList}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextCell Text="{Binding Apartment}" Detail="{Binding Date}"/>
+                            <TextCell
+                                x:Name="ShiftCell"
+                                ClassId="{Binding ShiftId}"
+                                Text="{Binding ApartmentName, StringFormat='Asunto: {0}'}" 
+                                Detail="{Binding Date, StringFormat='Leikkuu ajankohta: {0}'}"/>
                             <!--<ViewCell>
-                                <StackLayout BackgroundColor="#eee" Orientation="Vertical">
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding Apartment}"/>
-                                        <Label Text="{Binding Date}"/>
+                                <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                                    <StackLayout Orientation="Vertical" Padding="0,0,0,0" HeightRequest="200">
+                                        <Label x:Name="ShiftIdLbl" Text="{Binding ShiftId}" IsVisible="False"/>
+                                        <Label Text="{Binding ApartmentName, StringFormat='Asunto: {0}'}" HorizontalOptions="Center"/>
+                                        <Label Text="{Binding Date, StringFormat='Leikkuu ajankohta: {0}'}" HorizontalOptions="Center"/>
                                     </StackLayout>
                                 </StackLayout>
                             </ViewCell>-->
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <Button
+                    Text="Poista valittu vuoro"
+                    x:Name="DeleteShiftBtn"
+                    Clicked="ToMainPageBtn_Clicked"/>
             </StackLayout>
             <Button 
                 Text="Lisää uusi"

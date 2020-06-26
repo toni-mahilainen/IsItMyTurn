@@ -34,7 +34,6 @@
                     ItemsSource="{Binding ApartmentList}"
                     ItemDisplayBinding="{Binding ApartmentName}"
                     SelectedItem="{Binding SelectedItem}"/>
-                <Label Text="{Binding SelectedItem.ApartmentId}"/>
                 <Label 
                     Text="Valitse suoritetun leikkuun ajankohta"
                     FontSize="Large"

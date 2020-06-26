@@ -19,12 +19,6 @@ namespace IsItMyTurn.ViewModels
         }
         public List<Apartment> GetApartments()
         {
-            //HttpClient client = new HttpClient();
-            //HttpResponseMessage response = await client.GetAsync("https://isitmyturnapi.azurewebsites.net/api/apartment");
-
-            //string json = await response.Content.ReadAsStringAsync();
-            //Apartment[] apartmentObjectList = JsonConvert.DeserializeObject<Apartment[]>(json);
-            //List<Apartment> apartments = apartmentObjectList.ToList();
             var apartments = new List<Apartment>
             {
                 new Apartment() { ApartmentId = 1, ApartmentName = "A1"},
@@ -36,7 +30,6 @@ namespace IsItMyTurn.ViewModels
 
             return apartments;
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

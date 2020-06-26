@@ -16,9 +16,13 @@
             HorizontalOptions="FillAndExpand"/>
         <StackLayout VerticalOptions="CenterAndExpand">
             <Label 
+                Text="Leikkuuvuorossa:"
+                FontSize="Title"
+                HorizontalOptions="Center"/>
+            <Label 
                 x:Name="CurrentShiftLbl"
                 FontSize="Header"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center"/>
             <Button 
                 x:Name="RefreshBtn" 
                 Text="Päivitä" 

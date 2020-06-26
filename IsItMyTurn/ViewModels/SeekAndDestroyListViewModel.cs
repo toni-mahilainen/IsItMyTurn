@@ -12,6 +12,7 @@ namespace IsItMyTurn.ViewModels
     public class CompletedShift
     {
         public int ShiftId { get; set; }
+        public int ApartmentId { get; set; }
         public string ApartmentName { get; set; }
         public string Date { get; set; }
     }

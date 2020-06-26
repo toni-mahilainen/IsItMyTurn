@@ -7,6 +7,7 @@ namespace IsItMyTurn.Models
     public class CompletedShifts
     {
         public int ShiftId { get; set; }
+        public int ApartmentId { get; set; }
         public string ApartmentName { get; set; }
         public DateTime Date { get; set; }
     }

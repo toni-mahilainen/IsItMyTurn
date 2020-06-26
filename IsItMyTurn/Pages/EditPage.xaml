@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="IsItMyTurn.Pages.EditPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label 
+                Text="Is It My Turn"
+                FontSize="Title"
+                BackgroundColor="Beige"
+                HeightRequest="75"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
+                HorizontalOptions="FillAndExpand"/>
+            <Label 
+                Text="Tehdyn leikkuun tietojen muokkaus"
+                FontSize="Title"
+                VerticalOptions="Center" 
+                HorizontalOptions="CenterAndExpand"
+                Padding="20"/>
+            <StackLayout VerticalOptions="StartAndExpand">
+                <Label 
+                    Text="Valitse leikkuun suorittanut asunto"
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"/>
+                <Picker 
+                    x:Name="ApartmentPicker" 
+                    Title="Valitse asunto"
+                    HorizontalOptions="Center"
+                    ItemsSource="{Binding ApartmentList}"
+                    ItemDisplayBinding="{Binding ApartmentName}"
+                    SelectedItem="{Binding SelectedItem}"/>
+                <Label 
+                    Text="Valitse suoritetun leikkuun ajankohta"
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"/>
+                <DatePicker 
+                    x:Name="DatePicker"
+                    HorizontalOptions="Center"/>
+            </StackLayout>
+            <Button 
+                Text="Päivitä"
+                x:Name="UpdateBtn"
+                VerticalOptions="End"
+                Clicked="UpdateBtn_Clicked"/>
+            <Button
+                Text="Peruuta"
+                x:Name="CancelBtn"
+                VerticalOptions="End"
+                Clicked="CancelBtn_Clicked"/>
+            <Button
+                Text="Takaisin etusivulle"
+                x:Name="ToMainPageBtn"
+                VerticalOptions="End"
+                Clicked="ToMainPageBtn_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

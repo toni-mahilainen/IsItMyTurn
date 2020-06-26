@@ -43,7 +43,14 @@ namespace IsItMyTurn.Pages
 
                 foreach (var item in completedShiftsList)
                 {
-                    CompletedShift newListItem = new CompletedShift() { ShiftId = item.ShiftId, ApartmentName = item.ApartmentName, Date = item.Date.ToString("dd.MM.yyyy") };
+                    CompletedShift newListItem = new CompletedShift() 
+                    { 
+                        ShiftId = item.ShiftId, 
+                        ApartmentId = item.ApartmentId, 
+                        ApartmentName = item.ApartmentName, 
+                        Date = item.Date.ToString("dd.MM.yyyy") 
+                    };
+
                     newCompeletedShiftsList.Add(newListItem);
                 }
 
@@ -75,6 +82,7 @@ namespace IsItMyTurn.Pages
         private void listView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             DeleteShiftBtn.IsEnabled = true;
+            EditShiftBtn.IsEnabled = true;
         }
 
         private async void DeleteShiftBtn_Clicked(object sender, EventArgs e)
@@ -96,6 +104,14 @@ namespace IsItMyTurn.Pages
             {
                 await DisplayAlert("Virhe", "Kirjauksen poisto epäonnistui! Ole hyvä ja yritä uudelleen.", "OK");
             }
+        }
+
+        private void EditShiftBtn_Clicked(object sender, EventArgs e)
+        {
+            CompletedShift item = (CompletedShift)listView.SelectedItem;
+
+            var editPage = new EditPage(item);
+            Navigation.PushAsync(editPage);
         }
     }
 }

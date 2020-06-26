@@ -86,7 +86,7 @@ namespace IsItMyTurn.Pages
 
             if (response.IsSuccessStatusCode)
             {
-                await DisplayAlert("Is It My Turn", "Tehty kirjaus poistettu onnistuneesti!", "OK");
+                await DisplayAlert("Is It My Turn", "Kirjaus poistettu onnistuneesti!", "OK");
                 var vUpdatedPage = new SeekAndDestroy();
                 Navigation.InsertPageBefore(vUpdatedPage, this);
                 NavigationPage.SetHasNavigationBar(vUpdatedPage, false);

@@ -71,5 +71,31 @@ namespace IsItMyTurn.Pages
         {
             Navigation.PopToRootAsync();
         }
+
+        private void listView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            DeleteShiftBtn.IsEnabled = true;
+        }
+
+        private async void DeleteShiftBtn_Clicked(object sender, EventArgs e)
+        {
+            CompletedShift item = (CompletedShift)listView.SelectedItem;
+
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.DeleteAsync("https://isitmyturnapi.azurewebsites.net/api/completedshift/" + item.ShiftId.ToString());
+
+            if (response.IsSuccessStatusCode)
+            {
+                await DisplayAlert("Is It My Turn", "Tehty kirjaus poistettu onnistuneesti!", "OK");
+                var vUpdatedPage = new SeekAndDestroy();
+                Navigation.InsertPageBefore(vUpdatedPage, this);
+                NavigationPage.SetHasNavigationBar(vUpdatedPage, false);
+                await Navigation.PopAsync();
+            }
+            else
+            {
+                await DisplayAlert("Virhe", "Kirjauksen poisto epäonnistui! Ole hyvä ja yritä uudelleen.", "OK");
+            }
+        }
     }
 }

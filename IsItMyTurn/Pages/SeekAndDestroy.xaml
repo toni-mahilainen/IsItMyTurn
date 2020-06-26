@@ -21,35 +21,37 @@
                 VerticalOptions="Center" 
                 HorizontalOptions="CenterAndExpand"
                 Padding="20"/>
-            <StackLayout VerticalOptions="StartAndExpand">
+            <StackLayout>
                 <Label 
                     Text="Tehdyt leikkuut"
                     FontSize="Large"
                     HorizontalOptions="CenterAndExpand"/>
-                <ListView x:Name="listView" ItemsSource="{Binding CompletedShiftList}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextCell
-                                x:Name="ShiftCell"
-                                ClassId="{Binding ShiftId}"
-                                Text="{Binding ApartmentName, StringFormat='Asunto: {0}'}" 
-                                Detail="{Binding Date, StringFormat='Leikkuu ajankohta: {0}'}"/>
-                            <!--<ViewCell>
-                                <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
-                                    <StackLayout Orientation="Vertical" Padding="0,0,0,0" HeightRequest="200">
-                                        <Label x:Name="ShiftIdLbl" Text="{Binding ShiftId}" IsVisible="False"/>
-                                        <Label Text="{Binding ApartmentName, StringFormat='Asunto: {0}'}" HorizontalOptions="Center"/>
-                                        <Label Text="{Binding Date, StringFormat='Leikkuu ajankohta: {0}'}" HorizontalOptions="Center"/>
+                <ScrollView>
+                    <ListView x:Name="listView" ItemsSource="{Binding CompletedShiftList}" ItemTapped="listView_ItemTapped">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextCell
+                                    x:Name="ShiftCell"
+                                    Text="{Binding ApartmentName, StringFormat='Asunto: {0}'}" 
+                                    Detail="{Binding Date, StringFormat='Leikkuu ajankohta: {0}'}"/>
+                                <!--<ViewCell>
+                                    <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                                        <StackLayout Orientation="Vertical" Padding="0,0,0,0" HeightRequest="200">
+                                            <Label x:Name="ShiftIdLbl" Text="{Binding ShiftId}" IsVisible="False"/>
+                                            <Label Text="{Binding ApartmentName, StringFormat='Asunto: {0}'}" HorizontalOptions="Center"/>
+                                            <Label Text="{Binding Date, StringFormat='Leikkuu ajankohta: {0}'}" HorizontalOptions="Center"/>
+                                        </StackLayout>
                                     </StackLayout>
-                                </StackLayout>
-                            </ViewCell>-->
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                                </ViewCell>-->
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollView>
                 <Button
                     Text="Poista valittu vuoro"
                     x:Name="DeleteShiftBtn"
-                    Clicked="ToMainPageBtn_Clicked"/>
+                    Clicked="DeleteShiftBtn_Clicked"
+                    IsEnabled="False"/>
             </StackLayout>
             <Button 
                 Text="Lisää uusi"

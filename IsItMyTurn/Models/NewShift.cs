@@ -4,9 +4,9 @@ using System.Text;
 
 namespace IsItMyTurn.Models
 {
-    class CurrentShift
+    public class NewShift
     {
         public int ApartmentId { get; set; }
-        public string Apartment { get; set; }
+        public DateTime Date { get; set; }
     }
 }

@@ -4,9 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="IsItMyTurn.AddNew">
+             x:Class="IsItMyTurn.Pages.EditPage">
     <ContentPage.Content>
-        
         <StackLayout>
             <Label 
                 Text="Is It My Turn"
@@ -17,7 +16,7 @@
                 HorizontalTextAlignment="Center"
                 HorizontalOptions="FillAndExpand"/>
             <Label 
-                Text="Tehdyn leikkuun lisäys"
+                Text="Tehdyn leikkuun tietojen muokkaus"
                 FontSize="Title"
                 VerticalOptions="Center" 
                 HorizontalOptions="CenterAndExpand"
@@ -43,10 +42,10 @@
                     HorizontalOptions="Center"/>
             </StackLayout>
             <Button 
-                Text="Lisää"
-                x:Name="AddBtn"
+                Text="Päivitä"
+                x:Name="UpdateBtn"
                 VerticalOptions="End"
-                Clicked="AddBtn_Clicked"/>
+                Clicked="UpdateBtn_Clicked"/>
             <Button
                 Text="Peruuta"
                 x:Name="CancelBtn"
@@ -58,6 +57,5 @@
                 VerticalOptions="End"
                 Clicked="ToMainPageBtn_Clicked"/>
         </StackLayout>
-        
     </ContentPage.Content>
 </ContentPage>

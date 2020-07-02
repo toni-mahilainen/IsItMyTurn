@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="IsItMyTurn.MainPage">
-
     <StackLayout>
         <Label 
             Text="Is It My Turn"
@@ -15,12 +14,21 @@
             VerticalTextAlignment="Center"
             HorizontalTextAlignment="Center"
             HorizontalOptions="FillAndExpand"/>
-        <Label 
-            x:Name="CurrentShiftLbl"
-            Text="B2"
-            FontSize="Header"
-            HorizontalOptions="Center" 
-            VerticalOptions="CenterAndExpand"/>
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Label 
+                Text="Leikkuuvuorossa:"
+                FontSize="Title"
+                HorizontalOptions="Center"/>
+            <Label 
+                x:Name="CurrentShiftLbl"
+                FontSize="Header"
+                HorizontalOptions="Center"/>
+            <Button 
+                x:Name="RefreshBtn" 
+                Text="Päivitä" 
+                Clicked="RefreshBtn_Clicked"
+                HorizontalOptions="Center"/>
+        </StackLayout>
         <Button 
             x:Name="AddNewBtn" 
             Text="Lisää uusi" 
@@ -30,5 +38,4 @@
             Text="Selaa / Poista" 
             Clicked="SeekAndDestroyBtn_Clicked"/>
     </StackLayout>
-
 </ContentPage>

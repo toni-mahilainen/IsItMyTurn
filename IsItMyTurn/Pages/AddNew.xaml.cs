@@ -46,24 +46,48 @@ namespace IsItMyTurn
 
         private async void AddBtn_Clicked(object sender, EventArgs e)
         {
-            ViewModels.Apartment item = (ViewModels.Apartment)ApartmentPicker.SelectedItem;
-
-            NewShift newShift = new NewShift()
+            try
             {
-                ApartmentId = item.ApartmentId,
-                Date = DatePicker.Date
-            };
+                // If Firebase Cloud Messaging token exists, new shift data will be sent to backend
+                var FCMToken = Application.Current.Properties.Keys.Contains("Fcmtocken");
+                if (FCMToken)
+                {
+                    // Token to variable
+                    var FCMTockenValue = Application.Current.Properties["Fcmtocken"].ToString();
 
-            string json = JsonConvert.SerializeObject(newShift);
-            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.PostAsync("https://isitmyturnapi.azurewebsites.net/api/completedshift", content);
+                    ViewModels.Apartment item = (ViewModels.Apartment)ApartmentPicker.SelectedItem;
 
-            if (response.IsSuccessStatusCode)
+                    NewShift newShift = new NewShift()
+                    {
+                        ApartmentId = item.ApartmentId,
+                        Date = DatePicker.Date,
+                        FCMToken = FCMTockenValue
+                    };
+
+                    string json = JsonConvert.SerializeObject(newShift);
+                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    HttpClient client = new HttpClient();
+                    HttpResponseMessage response = await client.PostAsync("https://isitmyturnapi.azurewebsites.net/api/completedshift", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await DisplayAlert("Is It My Turn", "Suoritetun vuoron lisäys onnistui!", "OK");
+                        await Navigation.PopToRootAsync();
+                    }
+                    else
+                    {
+                        await DisplayAlert("Is It My Turn", "Tapahtui virhe lisätessä vuoroa. Ole hyvä ja yritä uudelleen.\r\nJos ongelma ei poistu, ota yhteyttä sovelluksen kehittäjään.", "OK");
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("Is It My Turn", "Tapahtui virhe lisätessä vuoroa. Ole hyvä ja yritä uudelleen.\r\nJos ongelma ei poistu, ota yhteyttä sovelluksen kehittäjään.", "OK");
+                }
+            }
+            catch (Exception ex)
             {
-                await DisplayAlert("Is It My Turn", "Suoritetun vuoron lisäys onnistui!", "OK");
-                await Navigation.PopToRootAsync();
+                Console.Write("Virhe: " + ex.Message);
             }
         }
 

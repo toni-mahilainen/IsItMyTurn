@@ -30,10 +30,6 @@
                 HorizontalOptions="Center"/>
         </StackLayout>
         <Button 
-            Text="Send Notification" 
-            x:Name="BtnSend" 
-            Clicked="BtnSend_Clicked"/>
-        <Button 
             x:Name="AddNewBtn" 
             Text="Lisää uusi" 
             Clicked="AddNewBtn_Clicked"/>

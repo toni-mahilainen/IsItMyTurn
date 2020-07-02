@@ -44,24 +44,7 @@ namespace IsItMyTurn.iOS
                 UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound;
                 UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(notificationTypes);
             }
-            //if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
-            //{
-            //    // iOS 10 or later
-            //    var authOptions = UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound;
-            //    UNUserNotificationCenter.Current.RequestAuthorization(authOptions, (granted, error) => {
-            //        Console.WriteLine(granted);
-            //    });
-
-            //    // For iOS 10 display notification (sent via APNS)
-            //    UNUserNotificationCenter.Current.Delegate = this;
-            //}
-            //else
-            //{
-            //    // iOS 9 or before
-            //    var allNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound;
-            //    var settings = UIUserNotificationSettings.GetSettingsForTypes(allNotificationTypes, null);
-            //    UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
-            //}
+            
             if (UNUserNotificationCenter.Current != null)
             {
                 UNUserNotificationCenter.Current.Delegate = new UserNotificationCenterDelegate();
@@ -112,6 +95,7 @@ namespace IsItMyTurn.iOS
         [Export("messaging:didReceiveRegistrationToken:")]
         public void DidReceiveRegistrationToken(Messaging messaging, string fcmToken)
         {
+            // FCM Token got here
             Xamarin.Forms.Application.Current.Properties["Fcmtocken"] = Messaging.SharedInstance.FcmToken ?? "";
             Xamarin.Forms.Application.Current.SavePropertiesAsync();
             System.Diagnostics.Debug.WriteLine($"######Token######  :  {fcmToken}");

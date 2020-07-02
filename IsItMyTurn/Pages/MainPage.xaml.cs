@@ -74,7 +74,7 @@ namespace IsItMyTurn
                     data.key2 = "";
                     data.key3 = "";
                     data.key4 = "";
-                    body.registration_ids = new[] { FCMTockenValue };
+                    body.registration_ids = new string[] { FCMTockenValue };
                     body.notification = notification;
                     body.data = data;
                     var isSuccessCall = SendNotification(body).Result;

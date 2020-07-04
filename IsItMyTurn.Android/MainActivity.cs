@@ -11,6 +11,8 @@ using Firebase.Messaging;
 using Firebase.Iid;
 using Android.Util;
 using Firebase;
+using Android.Gms.Tasks;
+using Java.Lang;
 
 namespace IsItMyTurn.Droid
 {

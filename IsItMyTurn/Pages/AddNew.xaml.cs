@@ -49,19 +49,19 @@ namespace IsItMyTurn
             try
             {
                 // If Firebase Cloud Messaging token exists, new shift data will be sent to backend
-                var FCMToken = Application.Current.Properties.Keys.Contains("Fcmtocken");
+                var FCMToken = Application.Current.Properties.Keys.Contains("Fcmtoken");
                 if (FCMToken)
                 {
                     // Token to variable
-                    var FCMTockenValue = Application.Current.Properties["Fcmtocken"].ToString();
-
+                    var FCMTokenValue = Application.Current.Properties["Fcmtoken"].ToString();
+                    
                     ViewModels.Apartment item = (ViewModels.Apartment)ApartmentPicker.SelectedItem;
 
                     NewShift newShift = new NewShift()
                     {
                         ApartmentId = item.ApartmentId,
                         Date = DatePicker.Date,
-                        FCMToken = FCMTockenValue
+                        FCMToken = FCMTokenValue
                     };
 
                     string json = JsonConvert.SerializeObject(newShift);

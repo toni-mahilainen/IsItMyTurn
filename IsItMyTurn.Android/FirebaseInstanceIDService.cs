@@ -26,7 +26,7 @@ namespace IsItMyTurn.Droid
             var refreshedToken = FirebaseInstanceId.Instance.Token;
             Android.Util.Log.Debug(TAG, "Refreshed token: " + refreshedToken);
             System.Diagnostics.Debug.WriteLine($"######Token######  :  {refreshedToken}");
-            Xamarin.Forms.Application.Current.Properties["Fcmtocken"] = FirebaseInstanceId.Instance.Token ?? "";
+            Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = FirebaseInstanceId.Instance.Token ?? "";
             Xamarin.Forms.Application.Current.SavePropertiesAsync();
         }
         // [END refresh_token] 

@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Text;
 using System.Net.Http;
 using System.Threading.Tasks;
+using IsItMyTurn.Models;
 
 namespace IsItMyTurn.iOS
 {
@@ -99,58 +100,67 @@ namespace IsItMyTurn.iOS
         [Export("messaging:didReceiveRegistrationToken:")]
         public async void DidReceiveRegistrationToken(Messaging messaging, string fcmToken)
         {
-            //var FCMToken = Xamarin.Forms.Application.Current.Properties.Keys.Contains("Fcmtocken");
-            bool notificationSettings = GetApplicationNotificationSettings();
-            if (notificationSettings)
+            var FCMToken = Xamarin.Forms.Application.Current.Properties.Keys.Contains("Fcmtoken");
+            if (FCMToken)
             {
-                //var FCMTockenValue = Xamarin.Forms.Application.Current.Properties["Fcmtocken"].ToString();
-                //if (FCMTockenValue == fcmToken)
-                //{
-                //    // Do nothing
-                //}
-                //else
-                //{
-                //    Xamarin.Forms.Application.Current.Properties["Fcmtocken"] = fcmToken;
-                //    Xamarin.Forms.Application.Current.SavePropertiesAsync();
-                //}
-                var FCMToken = Xamarin.Forms.Application.Current.Properties.Keys.Contains("Fcmtoken");
-                // If token exists, it is without enabled notifications. It will be removed.
-                if (FCMToken)
+                string checkToken = Xamarin.Forms.Application.Current.Properties["Fcmtoken"].ToString();
+                if (checkToken != "")
                 {
-                    Xamarin.Forms.Application.Current.Properties.Remove("Fcmtoken");
+                    if (Xamarin.Forms.Application.Current.Properties["Fcmtoken"].ToString() == fcmToken)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"######Token######  :  {fcmToken}");
+                    }
+                    else
+                    {
+                        string oldToken = Xamarin.Forms.Application.Current.Properties["Fcmtoken"].ToString();
+                        var successResponse = await TokenToDatabase(oldToken, fcmToken);
+                        if (successResponse)
+                        {
+                            Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = Messaging.SharedInstance.FcmToken ?? "";
+                            await Xamarin.Forms.Application.Current.SavePropertiesAsync();
+                            System.Diagnostics.Debug.WriteLine($"######Token######  :  {fcmToken}");
+                        }
+                    }
                 }
-                Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = Messaging.SharedInstance.FcmToken ?? "";
-                var successResponse = await TokenToDatabase(fcmToken);
-                if (successResponse)
+                else
                 {
-                    await Xamarin.Forms.Application.Current.SavePropertiesAsync();
-                    System.Diagnostics.Debug.WriteLine($"######Token######  :  {fcmToken}");
+                    string oldToken = "";
+                    var successResponse = await TokenToDatabase(oldToken, fcmToken);
+                    if (successResponse)
+                    {
+                        Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = Messaging.SharedInstance.FcmToken;
+                        await Xamarin.Forms.Application.Current.SavePropertiesAsync();
+                        System.Diagnostics.Debug.WriteLine($"######Token######  :  {fcmToken}");
+                    }
                 }
             }
             else
             {
-                // FCM Token got here
-                Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = Messaging.SharedInstance.FcmToken ?? "";
-                await Xamarin.Forms.Application.Current.SavePropertiesAsync();
-                System.Diagnostics.Debug.WriteLine($"######Token######  :  {fcmToken}");
-                //Console.WriteLine(fcmToken);
+                string oldToken = "";
+                var successResponse = await TokenToDatabase(oldToken, fcmToken);
+                if (successResponse)
+                {
+                    Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = Messaging.SharedInstance.FcmToken;
+                    await Xamarin.Forms.Application.Current.SavePropertiesAsync();
+                    System.Diagnostics.Debug.WriteLine($"######Token######  :  {fcmToken}");
+                }
             }
         }
 
-        public async Task<bool> TokenToDatabase(string token)
+        public async Task<bool> TokenToDatabase(string oldToken, string newToken)
         {
-            StringContent content = new StringContent(token, Encoding.UTF8, "application/json");
+            FcmToken fcmToken = new FcmToken()
+            {
+                OldToken = oldToken,
+                NewToken = newToken
+            };
+
+            string json = JsonConvert.SerializeObject(fcmToken);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.PostAsync("https://isitmyturnapi.azurewebsites.net/api/completedshift", content);
+            HttpResponseMessage response = await client.PostAsync("https://isitmyturnapi.azurewebsites.net/api/fcmtoken", content);
             return response.IsSuccessStatusCode;
-        }
-
-        // Check if notification is enabled
-        public bool GetApplicationNotificationSettings()
-        {
-            var settings = UIApplication.SharedApplication.CurrentUserNotificationSettings.Types;
-            return settings != UIUserNotificationType.None;
         }
     }
 }

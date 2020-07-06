@@ -60,8 +60,7 @@ namespace IsItMyTurn
                     NewShift newShift = new NewShift()
                     {
                         ApartmentId = item.ApartmentId,
-                        Date = DatePicker.Date,
-                        FCMToken = FCMTokenValue
+                        Date = DatePicker.Date
                     };
 
                     string json = JsonConvert.SerializeObject(newShift);

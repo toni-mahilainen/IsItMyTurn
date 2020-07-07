@@ -63,7 +63,7 @@ namespace IsItMyTurn.Pages
             }
             else
             {
-                await DisplayAlert("Virhe", "Tehtyjen leikkuiden haku epäonnistui! Ole hyvä ja lataa sivu uudelleen.", "OK");
+                await DisplayAlert("Virhe", "Kirjausten haku epäonnistui! Ole hyvä ja lataa sivu uudelleen.", "OK");
             }
         }
 
@@ -88,21 +88,28 @@ namespace IsItMyTurn.Pages
         private async void DeleteShiftBtn_Clicked(object sender, EventArgs e)
         {
             CompletedShift item = (CompletedShift)listView.SelectedItem;
-
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.DeleteAsync("https://isitmyturnapi.azurewebsites.net/api/completedshift/" + item.ShiftId.ToString());
-
-            if (response.IsSuccessStatusCode)
+            
+            var answer = await DisplayAlert("Is It My Turn", 
+                "Haluatko varmasti poistaa valitun kirjauksen?\r\n\r\n" +
+                "Asunto: " + item.ApartmentName + "\r\n" +
+                "Leikkuu ajankohta: " + item.Date, "Kyllä", "Ei");
+            if (answer)
             {
-                await DisplayAlert("Is It My Turn", "Kirjaus poistettu onnistuneesti!", "OK");
-                var vUpdatedPage = new SeekAndDestroy();
-                Navigation.InsertPageBefore(vUpdatedPage, this);
-                NavigationPage.SetHasNavigationBar(vUpdatedPage, false);
-                await Navigation.PopAsync();
-            }
-            else
-            {
-                await DisplayAlert("Virhe", "Kirjauksen poisto epäonnistui! Ole hyvä ja yritä uudelleen.", "OK");
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.DeleteAsync("https://isitmyturnapi.azurewebsites.net/api/completedshift/" + item.ShiftId.ToString());
+
+                if (response.IsSuccessStatusCode)
+                {
+                    await DisplayAlert("Is It My Turn", "Kirjaus poistettu onnistuneesti!", "OK");
+                    var vUpdatedPage = new SeekAndDestroy();
+                    Navigation.InsertPageBefore(vUpdatedPage, this);
+                    NavigationPage.SetHasNavigationBar(vUpdatedPage, false);
+                    await Navigation.PopAsync();
+                }
+                else
+                {
+                    await DisplayAlert("Virhe", "Kirjauksen poisto epäonnistui! Ole hyvä ja yritä uudelleen.", "OK");
+                }
             }
         }
 

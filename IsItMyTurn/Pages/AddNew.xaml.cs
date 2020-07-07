@@ -52,10 +52,7 @@ namespace IsItMyTurn
                 var FCMToken = Application.Current.Properties.Keys.Contains("Fcmtoken");
                 if (FCMToken)
                 {
-                    // Token to variable
-                    var FCMTokenValue = Application.Current.Properties["Fcmtoken"].ToString();
-                    
-                    ViewModels.Apartment item = (ViewModels.Apartment)ApartmentPicker.SelectedItem;
+                    Apartment item = (Apartment)ApartmentPicker.SelectedItem;
 
                     NewShift newShift = new NewShift()
                     {
@@ -68,20 +65,28 @@ namespace IsItMyTurn
 
                     HttpClient client = new HttpClient();
                     HttpResponseMessage response = await client.PostAsync("https://isitmyturnapi.azurewebsites.net/api/completedshift", content);
+                    int status = (int)response.StatusCode;
 
-                    if (response.IsSuccessStatusCode)
+                    if (status == 200)
                     {
-                        await DisplayAlert("Is It My Turn", "Suoritetun vuoron lisäys onnistui!", "OK");
+                        await DisplayAlert("Is It My Turn", "Vuoron lisäys onnistui!", "OK");
+                        await Navigation.PopToRootAsync();
+                    }
+                    else if (status == 201)
+                    {
+                        await DisplayAlert("Is It My Turn",
+                            "Vuoron lisäys onnistui, mutta ilmoitusten lähettämisessä käyttäjille ilmeni ongelmia.\r\n\r\n" +
+                            "Käytä WhatsApp-ryhmää vuoron vaihdon ilmoittamiseen ja ota yhteyttä sovelluksen ylläpitäjään.", "OK");
                         await Navigation.PopToRootAsync();
                     }
                     else
                     {
-                        await DisplayAlert("Is It My Turn", "Tapahtui virhe lisätessä vuoroa. Ole hyvä ja yritä uudelleen.\r\nJos ongelma ei poistu, ota yhteyttä sovelluksen kehittäjään.", "OK");
+                        await DisplayAlert("Is It My Turn", "Tapahtui virhe lisätessä vuoroa. Ole hyvä ja yritä uudelleen.\r\nJos ongelma ei poistu, ota yhteyttä sovelluksen ylläpitäjään.", "OK");
                     }
                 }
                 else
                 {
-                    await DisplayAlert("Is It My Turn", "Tapahtui virhe lisätessä vuoroa. Ole hyvä ja yritä uudelleen.\r\nJos ongelma ei poistu, ota yhteyttä sovelluksen kehittäjään.", "OK");
+                    await DisplayAlert("Is It My Turn", "Tapahtui virhe lisätessä vuoroa. Ole hyvä ja yritä uudelleen.\r\nJos ongelma ei poistu, ota yhteyttä sovelluksen ylläpitäjään.", "OK");
                 }
             }
             catch (Exception ex)

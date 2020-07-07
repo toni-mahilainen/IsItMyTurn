@@ -23,7 +23,7 @@
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>IsItMyTurn</string>
+	<string>Is It My Turn</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.companyname.IsItMyTurn</string>
 	<key>CFBundleVersion</key>

@@ -8,7 +8,5 @@ namespace IsItMyTurn.Models
     {
         public int ApartmentId { get; set; }
         public DateTime Date { get; set; }
-
-        public string FCMToken { get; set; }
     }
 }

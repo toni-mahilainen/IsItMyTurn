@@ -10,6 +10,7 @@ using System.Text;
 using System.Net.Http;
 using System.Threading.Tasks;
 using IsItMyTurn.Models;
+using Security;
 
 namespace IsItMyTurn.iOS
 {
@@ -49,7 +50,7 @@ namespace IsItMyTurn.iOS
                 UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound;
                 UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(notificationTypes);
             }
-            
+
             if (UNUserNotificationCenter.Current != null)
             {
                 UNUserNotificationCenter.Current.Delegate = new UserNotificationCenterDelegate();
@@ -100,6 +101,7 @@ namespace IsItMyTurn.iOS
         [Export("messaging:didReceiveRegistrationToken:")]
         public async void DidReceiveRegistrationToken(Messaging messaging, string fcmToken)
         {
+            string uniqueId = GetUniqueId();
             var FCMToken = Xamarin.Forms.Application.Current.Properties.Keys.Contains("Fcmtoken");
             if (FCMToken)
             {
@@ -113,7 +115,7 @@ namespace IsItMyTurn.iOS
                     else
                     {
                         string oldToken = Xamarin.Forms.Application.Current.Properties["Fcmtoken"].ToString();
-                        var successResponse = await TokenToDatabase(oldToken, fcmToken);
+                        var successResponse = await DeviceInfoToDatabase(uniqueId, oldToken, fcmToken);
                         if (successResponse)
                         {
                             Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = Messaging.SharedInstance.FcmToken ?? "";
@@ -125,7 +127,7 @@ namespace IsItMyTurn.iOS
                 else
                 {
                     string oldToken = "";
-                    var successResponse = await TokenToDatabase(oldToken, fcmToken);
+                    var successResponse = await DeviceInfoToDatabase(uniqueId, oldToken, fcmToken);
                     if (successResponse)
                     {
                         Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = Messaging.SharedInstance.FcmToken;
@@ -137,7 +139,7 @@ namespace IsItMyTurn.iOS
             else
             {
                 string oldToken = "";
-                var successResponse = await TokenToDatabase(oldToken, fcmToken);
+                var successResponse = await DeviceInfoToDatabase(uniqueId, oldToken, fcmToken);
                 if (successResponse)
                 {
                     Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = Messaging.SharedInstance.FcmToken;
@@ -147,10 +149,11 @@ namespace IsItMyTurn.iOS
             }
         }
 
-        public async Task<bool> TokenToDatabase(string oldToken, string newToken)
+        public async Task<bool> DeviceInfoToDatabase(string uniqueId, string oldToken, string newToken)
         {
-            FcmToken fcmToken = new FcmToken()
+            Identifier fcmToken = new Identifier()
             {
+                DeviceId = uniqueId,
                 OldToken = oldToken,
                 NewToken = newToken
             };
@@ -161,6 +164,29 @@ namespace IsItMyTurn.iOS
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.PostAsync("https://isitmyturnapi.azurewebsites.net/api/fcmtoken", content);
             return response.IsSuccessStatusCode;
+        }
+
+        public string GetUniqueId()
+        {
+            var query = new SecRecord(SecKind.GenericPassword);
+            query.Service = NSBundle.MainBundle.BundleIdentifier;
+            query.Account = "UniqueID";
+
+            NSData uniqueId = SecKeyChain.QueryAsData(query);
+
+            if (uniqueId != null)
+            {
+                return uniqueId.ToString();
+            }
+            else
+            {
+                query.ValueData = NSData.FromString(System.Guid.NewGuid().ToString());
+                var err = SecKeyChain.Add(query);
+                if (err != SecStatusCode.Success && err != SecStatusCode.DuplicateItem)
+                    throw new Exception("Cannot store Unique ID");
+
+                return query.ValueData.ToString();
+            }
         }
     }
 }

@@ -46,7 +46,7 @@ namespace IsItMyTurn.Droid
 
         public async Task<bool> TokenToDatabase(string oldToken, string newToken)
         {
-            FcmToken fcmToken = new FcmToken()
+            Identifier fcmToken = new Identifier()
             {
                 OldToken = oldToken,
                 NewToken = newToken

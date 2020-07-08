@@ -4,8 +4,9 @@ using System.Text;
 
 namespace IsItMyTurn.Models
 {
-    public class FcmToken
+    public class Identifier
     {
+        public string DeviceId { get; set; }
         public string OldToken { get; set; }
         public string NewToken { get; set; }
     }

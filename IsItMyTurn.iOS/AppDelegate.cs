@@ -114,8 +114,7 @@ namespace IsItMyTurn.iOS
                     }
                     else
                     {
-                        string oldToken = Xamarin.Forms.Application.Current.Properties["Fcmtoken"].ToString();
-                        var successResponse = await DeviceInfoToDatabase(uniqueId, oldToken, fcmToken);
+                        var successResponse = await DeviceInfoToDatabase(uniqueId, fcmToken);
                         if (successResponse)
                         {
                             Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = Messaging.SharedInstance.FcmToken ?? "";
@@ -126,8 +125,7 @@ namespace IsItMyTurn.iOS
                 }
                 else
                 {
-                    string oldToken = "";
-                    var successResponse = await DeviceInfoToDatabase(uniqueId, oldToken, fcmToken);
+                    var successResponse = await DeviceInfoToDatabase(uniqueId, fcmToken);
                     if (successResponse)
                     {
                         Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = Messaging.SharedInstance.FcmToken;
@@ -138,8 +136,7 @@ namespace IsItMyTurn.iOS
             }
             else
             {
-                string oldToken = "";
-                var successResponse = await DeviceInfoToDatabase(uniqueId, oldToken, fcmToken);
+                var successResponse = await DeviceInfoToDatabase(uniqueId, fcmToken);
                 if (successResponse)
                 {
                     Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = Messaging.SharedInstance.FcmToken;
@@ -149,13 +146,12 @@ namespace IsItMyTurn.iOS
             }
         }
 
-        public async Task<bool> DeviceInfoToDatabase(string uniqueId, string oldToken, string newToken)
+        public async Task<bool> DeviceInfoToDatabase(string uniqueId, string token)
         {
             Identifier fcmToken = new Identifier()
             {
-                DeviceId = uniqueId,
-                OldToken = oldToken,
-                NewToken = newToken
+                UniqueIdentifier = uniqueId,
+                Token = token
             };
 
             string json = JsonConvert.SerializeObject(fcmToken);

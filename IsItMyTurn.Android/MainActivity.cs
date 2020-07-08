@@ -29,10 +29,7 @@ namespace IsItMyTurn.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             FirebaseApp.InitializeApp(this);
-            FirebaseMessaging.Instance.SubscribeToTopic("uitontie5");
             LoadApplication(new App());
-            var id = Android.Provider.Settings.Secure.GetString(Application.Context.ContentResolver, Android.Provider.Settings.Secure.AndroidId);
-            System.Diagnostics.Debug.WriteLine($"######ID######  :  {id}");
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

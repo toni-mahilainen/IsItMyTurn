@@ -101,7 +101,7 @@ namespace IsItMyTurn.iOS
         [Export("messaging:didReceiveRegistrationToken:")]
         public async void DidReceiveRegistrationToken(Messaging messaging, string fcmToken)
         {
-            string uniqueId = GetUniqueId();
+            string uniqueId = GetUniqueHashedId();
             var FCMToken = Xamarin.Forms.Application.Current.Properties.Keys.Contains("Fcmtoken");
             if (FCMToken)
             {
@@ -162,17 +162,18 @@ namespace IsItMyTurn.iOS
             return response.IsSuccessStatusCode;
         }
 
-        public string GetUniqueId()
+        public string GetUniqueHashedId()
         {
             var query = new SecRecord(SecKind.GenericPassword);
             query.Service = NSBundle.MainBundle.BundleIdentifier;
             query.Account = "UniqueID";
 
             NSData uniqueId = SecKeyChain.QueryAsData(query);
+            var hashedId = GetSha256HashForId(uniqueId.ToString());
 
             if (uniqueId != null)
             {
-                return uniqueId.ToString();
+                return hashedId;
             }
             else
             {
@@ -183,6 +184,19 @@ namespace IsItMyTurn.iOS
 
                 return query.ValueData.ToString();
             }
+        }
+
+        internal static string GetSha256HashForId(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return string.Empty;
+            }
+
+            var sha = new System.Security.Cryptography.SHA256Managed();
+            byte[] textData = Encoding.UTF8.GetBytes(text);
+            byte[] hash = sha.ComputeHash(textData);
+            return BitConverter.ToString(hash).Replace("-", string.Empty);
         }
     }
 }

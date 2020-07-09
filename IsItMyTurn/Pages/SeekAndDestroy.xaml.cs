@@ -97,8 +97,12 @@ namespace IsItMyTurn.Pages
             {
                 HttpClient client = new HttpClient();
                 HttpResponseMessage response = await client.DeleteAsync("https://isitmyturnapi.azurewebsites.net/api/completedshift/" + item.ShiftId.ToString());
+                int status = (int)response.StatusCode;
 
-                if (response.IsSuccessStatusCode)
+                // Status codes:
+                // 200 - Everything OK
+                // 201 - A shift has deleted successfully. Some problems with notifications
+                if (status == 200)
                 {
                     await DisplayAlert("Is It My Turn", "Kirjaus poistettu onnistuneesti!", "OK");
                     var vUpdatedPage = new SeekAndDestroy();
@@ -106,9 +110,19 @@ namespace IsItMyTurn.Pages
                     NavigationPage.SetHasNavigationBar(vUpdatedPage, false);
                     await Navigation.PopAsync();
                 }
+                else if (status == 201)
+                {
+                    await DisplayAlert("Is It My Turn",
+                        "Kirjauksen poisto onnistui, mutta ilmoitusten lähettämisessä käyttäjille ilmeni ongelmia.\r\n\r\n" +
+                        "Käytä WhatsApp-ryhmää vuoron vaihdon ilmoittamiseen ja ota yhteyttä sovelluksen ylläpitäjään.", "OK");
+                    var vUpdatedPage = new SeekAndDestroy();
+                    Navigation.InsertPageBefore(vUpdatedPage, this);
+                    NavigationPage.SetHasNavigationBar(vUpdatedPage, false);
+                    await Navigation.PopAsync();
+                }
                 else
                 {
-                    await DisplayAlert("Virhe", "Kirjauksen poisto epäonnistui! Ole hyvä ja yritä uudelleen.", "OK");
+                    await DisplayAlert("Is It My Turn", "Kirjauksen päivitys epäonnistui! Ole hyvä ja yritä uudelleen.\r\nJos ongelma ei poistu, ota yhteyttä sovelluksen ylläpitäjään.", "OK");
                 }
             }
         }

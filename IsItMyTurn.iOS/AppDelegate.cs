@@ -113,12 +113,12 @@ namespace IsItMyTurn.iOS
                 {
                     if (Xamarin.Forms.Application.Current.Properties["Fcmtoken"].ToString() == fcmToken)
                     {
-                        // If a received token is same than exist one, do nothing
+                        // If a received token is same than the exist one, do nothing
                         System.Diagnostics.Debug.WriteLine($"######Token######  :  {fcmToken}");
                     }
                     else
                     {
-                        // If a received token is different than exist one and exist token is not null, a token and a device ID will be sent to database
+                        // If a received token is different than the exist one and the exist token is not null, a token and a device ID will be sent to database
                         var successResponse = await DeviceInfoToDatabase(uniqueId, fcmToken);
                         if (successResponse)
                         {
@@ -130,6 +130,7 @@ namespace IsItMyTurn.iOS
                 }
                 else
                 {
+                    // If a exist token is empty
                     var successResponse = await DeviceInfoToDatabase(uniqueId, fcmToken);
                     if (successResponse)
                     {
@@ -141,6 +142,7 @@ namespace IsItMyTurn.iOS
             }
             else
             {
+                // If the device not have token at all
                 var successResponse = await DeviceInfoToDatabase(uniqueId, fcmToken);
                 if (successResponse)
                 {
@@ -169,11 +171,13 @@ namespace IsItMyTurn.iOS
 
         public string GetUniqueHashedId()
         {
+            // Get unique device ID
             var query = new SecRecord(SecKind.GenericPassword);
             query.Service = NSBundle.MainBundle.BundleIdentifier;
             query.Account = "UniqueID";
 
             NSData uniqueId = SecKeyChain.QueryAsData(query);
+            // Get it hashed
             var hashedId = GetSha256HashForId(uniqueId.ToString());
 
             if (uniqueId != null)

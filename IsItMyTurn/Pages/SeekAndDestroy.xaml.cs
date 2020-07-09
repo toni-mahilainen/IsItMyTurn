@@ -17,12 +17,10 @@ namespace IsItMyTurn.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SeekAndDestroy : ContentPage
     {
-        ObservableCollection<CompletedShift> shiftList = new ObservableCollection<CompletedShift>();
-
         public SeekAndDestroy()
         {
             InitializeComponent();
-            BindingContext = new SeekAndDestroyListViewModel();
+            BindingContext = new CompletedShift();
         }
 
         protected override void OnAppearing()
@@ -32,33 +30,31 @@ namespace IsItMyTurn.Pages
 
         private async void GetCompletedShifts()
         {
+            // Get a list of completed shifts
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.GetAsync("https://isitmyturnapi.azurewebsites.net/api/completedshift");
             
             if (response.IsSuccessStatusCode)
             {
                 string json = await response.Content.ReadAsStringAsync();
-                List<CompletedShifts> completedShiftsList = JsonConvert.DeserializeObject<List<CompletedShifts>>(json);
+                List<CompletedShift> completedShiftsList = JsonConvert.DeserializeObject<List<CompletedShift>>(json);
+                // List object for list of shift. Date to string
                 List<CompletedShift> newCompeletedShiftsList = new List<CompletedShift>();
 
                 foreach (var item in completedShiftsList)
                 {
-                    CompletedShift newListItem = new CompletedShift() 
-                    { 
+                    CompletedShift newListItem = new CompletedShift()
+                    {
                         ShiftId = item.ShiftId, 
                         ApartmentId = item.ApartmentId, 
                         ApartmentName = item.ApartmentName, 
-                        Date = item.Date.ToString("dd.MM.yyyy") 
+                        DateStr = item.Date.ToString("dd.MM.yyyy") 
                     };
 
                     newCompeletedShiftsList.Add(newListItem);
                 }
 
-                SeekAndDestroyListViewModel model = new SeekAndDestroyListViewModel()
-                {
-                    CompletedShiftList = newCompeletedShiftsList
-                };
-
+                // List to listview
                 listView.ItemsSource = newCompeletedShiftsList;
             }
             else
@@ -81,6 +77,7 @@ namespace IsItMyTurn.Pages
 
         private void listView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
+            // Buttons enabled when tapped the listview item
             DeleteShiftBtn.IsEnabled = true;
             EditShiftBtn.IsEnabled = true;
         }
@@ -89,10 +86,13 @@ namespace IsItMyTurn.Pages
         {
             CompletedShift item = (CompletedShift)listView.SelectedItem;
             
+            // Get confirmation from user for delete
             var answer = await DisplayAlert("Is It My Turn", 
                 "Haluatko varmasti poistaa valitun kirjauksen?\r\n\r\n" +
                 "Asunto: " + item.ApartmentName + "\r\n" +
-                "Leikkuu ajankohta: " + item.Date, "Kyllä", "Ei");
+                "Leikkuu ajankohta: " + item.DateStr, "Kyllä", "Ei");
+
+            // If true, delete from database
             if (answer)
             {
                 HttpClient client = new HttpClient();
@@ -115,6 +115,7 @@ namespace IsItMyTurn.Pages
 
         private void EditShiftBtn_Clicked(object sender, EventArgs e)
         {
+            // To Edit -page, tapped listview item as parameter
             CompletedShift item = (CompletedShift)listView.SelectedItem;
 
             var editPage = new EditPage(item);

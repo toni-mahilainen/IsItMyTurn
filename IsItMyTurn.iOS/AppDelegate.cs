@@ -25,10 +25,10 @@ namespace IsItMyTurn.iOS
             System.Diagnostics.Debug.WriteLine($"FCM Token: {fcmToken}");
         }
 
-        //This method is invoked when the application has loaded and is ready to run.In this
-        //method you should instantiate the window, load the UI into it and then make the window
-        //visible.
-        //You have 17 seconds to return from this method, or iOS will terminate your application.
+        // This method is invoked when the application has loaded and is ready to run. In this
+        // method you should instantiate the window, load the UI into it and then make the window
+        // visible.
+        // You have 17 seconds to return from this method, or iOS will terminate your application.
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Xamarin.Forms.Forms.Init();
@@ -36,6 +36,8 @@ namespace IsItMyTurn.iOS
             RegisterForRemoteNotifications();
             LoadApplication(new App());
             Messaging.SharedInstance.Delegate = this;
+
+            // Check iOS version for notification settings
             if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
             {
                 var pushSettings = UIUserNotificationSettings.GetSettingsForTypes(
@@ -101,6 +103,7 @@ namespace IsItMyTurn.iOS
         [Export("messaging:didReceiveRegistrationToken:")]
         public async void DidReceiveRegistrationToken(Messaging messaging, string fcmToken)
         {
+            // Get hashed device ID
             string uniqueId = GetUniqueHashedId();
             var FCMToken = Xamarin.Forms.Application.Current.Properties.Keys.Contains("Fcmtoken");
             if (FCMToken)
@@ -110,14 +113,16 @@ namespace IsItMyTurn.iOS
                 {
                     if (Xamarin.Forms.Application.Current.Properties["Fcmtoken"].ToString() == fcmToken)
                     {
+                        // If a received token is same than exist one, do nothing
                         System.Diagnostics.Debug.WriteLine($"######Token######  :  {fcmToken}");
                     }
                     else
                     {
+                        // If a received token is different than exist one and exist token is not null, a token and a device ID will be sent to database
                         var successResponse = await DeviceInfoToDatabase(uniqueId, fcmToken);
                         if (successResponse)
                         {
-                            Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = Messaging.SharedInstance.FcmToken ?? "";
+                            Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = fcmToken;
                             await Xamarin.Forms.Application.Current.SavePropertiesAsync();
                             System.Diagnostics.Debug.WriteLine($"######Token######  :  {fcmToken}");
                         }
@@ -128,7 +133,7 @@ namespace IsItMyTurn.iOS
                     var successResponse = await DeviceInfoToDatabase(uniqueId, fcmToken);
                     if (successResponse)
                     {
-                        Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = Messaging.SharedInstance.FcmToken;
+                        Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = fcmToken;
                         await Xamarin.Forms.Application.Current.SavePropertiesAsync();
                         System.Diagnostics.Debug.WriteLine($"######Token######  :  {fcmToken}");
                     }
@@ -139,7 +144,7 @@ namespace IsItMyTurn.iOS
                 var successResponse = await DeviceInfoToDatabase(uniqueId, fcmToken);
                 if (successResponse)
                 {
-                    Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = Messaging.SharedInstance.FcmToken;
+                    Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = fcmToken;
                     await Xamarin.Forms.Application.Current.SavePropertiesAsync();
                     System.Diagnostics.Debug.WriteLine($"######Token######  :  {fcmToken}");
                 }

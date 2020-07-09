@@ -21,12 +21,11 @@ namespace FCMSample.Droid
         {
             try
             {
-                Android.Util.Log.Debug(TAG, "From: " + message.From);
-                Android.Util.Log.Debug(TAG, "Notification Message Body: " + message.GetNotification().Body);
                 SendNotifications(message);
             }
             catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"######Token######  :  {ex.Message}");
             }
 
         }
@@ -42,6 +41,8 @@ namespace FCMSample.Droid
                 var push = new Intent();
                 var fullScreenPendingIntent = PendingIntent.GetActivity(this, 0, push, PendingIntentFlags.CancelCurrent);
                 NotificationCompat.Builder notification;
+
+                // Check the version of API
                 if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
                 {
                     var chan1 = new NotificationChannel(PRIMARY_CHANNEL,
@@ -54,6 +55,8 @@ namespace FCMSample.Droid
                 {
                     notification = new NotificationCompat.Builder(this);
                 }
+
+                // Settings for notification
                 notification.SetContentIntent(fullScreenPendingIntent)
                          .SetContentTitle(message.GetNotification().Title)
                          .SetContentText(message.GetNotification().Body)
@@ -67,6 +70,7 @@ namespace FCMSample.Droid
             }
             catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"######Token######  :  {ex.Message}");
             }
         }
     }

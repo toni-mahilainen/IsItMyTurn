@@ -27,19 +27,22 @@ namespace IsItMyTurn.Pages
 
         protected override void OnAppearing()
         {
-            string[] splittedDateString = shiftObject.Date.Split(new Char[] { '.' });
+            // Data for the shift to be edited to apartment and date pickers
+            string[] splittedDateString = shiftObject.DateStr.Split(new char[] { '.' });
 
             int day = int.Parse(splittedDateString[0]);
             int month = int.Parse(splittedDateString[1]);
             int year = int.Parse(splittedDateString[2]);
 
-            ApartmentPicker.SelectedIndex = shiftObject.ApartmentId -1;
+            ApartmentPicker.SelectedIndex = shiftObject.ApartmentId - 1;
             DatePicker.Date = new DateTime(year, month, day);
         }
 
         private async void UpdateBtn_Clicked(object sender, EventArgs e)
         {
-            ViewModels.Apartment item = (ViewModels.Apartment)ApartmentPicker.SelectedItem;
+            // Updated data to database
+            Apartment item = (Apartment)ApartmentPicker.SelectedItem;
+
             NewShift newShift = new NewShift()
             {
                 ApartmentId = item.ApartmentId,
@@ -62,7 +65,7 @@ namespace IsItMyTurn.Pages
             }
             else
             {
-                await DisplayAlert("Virhe", "Kirjauksen poisto epäonnistui! Ole hyvä ja yritä uudelleen.", "OK");
+                await DisplayAlert("Virhe", "Kirjauksen päivitys epäonnistui! Ole hyvä ja yritä uudelleen.", "OK");
             }
         }
 

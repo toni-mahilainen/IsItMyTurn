@@ -19,11 +19,12 @@ namespace IsItMyTurn.ViewModels
         }
         public List<Apartment> GetApartments()
         {
+            // Apartments for picker
             var apartments = new List<Apartment>
             {
                 new Apartment() { ApartmentId = 1, ApartmentName = "A1"},
                 new Apartment() { ApartmentId = 2, ApartmentName = "A2"},
-                new Apartment() { ApartmentId = 3, ApartmentName = "A4/B6"},
+                new Apartment() { ApartmentId = 3, ApartmentName = "A4 / B6"},
                 new Apartment() { ApartmentId = 4, ApartmentName = "B7"},
                 new Apartment() { ApartmentId = 5, ApartmentName = "B8"}
             };

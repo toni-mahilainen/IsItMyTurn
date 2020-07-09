@@ -17,7 +17,7 @@ using Java.Lang;
 namespace IsItMyTurn.Droid
 {
     [Activity(Label = "IsItMyTurn", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    public class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -27,7 +27,9 @@ namespace IsItMyTurn.Droid
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            // Initialize app for Firebase
             FirebaseApp.InitializeApp(this);
             LoadApplication(new App());
         }

@@ -66,7 +66,10 @@ namespace IsItMyTurn
                     HttpClient client = new HttpClient();
                     HttpResponseMessage response = await client.PostAsync("https://isitmyturnapi.azurewebsites.net/api/completedshift", content);
                     int status = (int)response.StatusCode;
-
+                    
+                    // Status codes:
+                    // 200 - Everything OK
+                    // 201 - A shift has added successfully. Some problems with notifications
                     if (status == 200)
                     {
                         await DisplayAlert("Is It My Turn", "Vuoron lisäys onnistui!", "OK");
@@ -91,7 +94,7 @@ namespace IsItMyTurn
             }
             catch (Exception ex)
             {
-                Console.Write("Virhe: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine($"######Error###### : {ex.Message}");
             }
         }
 

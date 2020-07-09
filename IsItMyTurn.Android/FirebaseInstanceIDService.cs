@@ -27,23 +27,23 @@ namespace IsItMyTurn.Droid
         public async override void OnTokenRefresh()
         {
 
-            // Get updated InstanceID token.
+            // Get device ID
             var uniqueId = Android.Provider.Settings.Secure.GetString(Application.Context.ContentResolver, Android.Provider.Settings.Secure.AndroidId);
+            // Get it hashed
             var hashedId = GetSha256HashForId(uniqueId);
-            //var telephonyManager = (TelephonyManager)GetSystemService(TelephonyService);
-            //var uniqueId = telephonyManager.DeviceId;
+            // Get updated registration token.
             var fcmToken = FirebaseInstanceId.Instance.Token;
 
             if (fcmToken != null)
             {
+                // A token and a hashed device ID to database
                 var successResponse = await DeviceInfoToDatabase(hashedId, fcmToken);
                 if (successResponse)
                 {
-                    Android.Util.Log.Debug(TAG, "Refreshed token: " + fcmToken);
+                    // If succeeded, a token will be saved to properties with key "Fcmtoken"
                     System.Diagnostics.Debug.WriteLine($"######Token######  :  {fcmToken}");
                     Xamarin.Forms.Application.Current.Properties["Fcmtoken"] = fcmToken;
                     await Xamarin.Forms.Application.Current.SavePropertiesAsync();
-                    System.Diagnostics.Debug.WriteLine($"######Token######  :  {fcmToken}");
                 }
             }
         }

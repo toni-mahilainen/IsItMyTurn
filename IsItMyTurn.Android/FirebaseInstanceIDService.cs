@@ -21,8 +21,6 @@ namespace IsItMyTurn.Droid
     [IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
     public class FirebaseInstanceIDService : FirebaseInstanceIdService
     {
-        const string TAG = "MyFirebaseIIDService";
-
         // [START refresh_token]
         public async override void OnTokenRefresh()
         {
@@ -49,7 +47,7 @@ namespace IsItMyTurn.Droid
         }
         // [END refresh_token] 
 
-        internal async Task<bool> DeviceInfoToDatabase(string uniqueId, string token)
+        private async Task<bool> DeviceInfoToDatabase(string uniqueId, string token)
         {
             Identifier fcmToken = new Identifier()
             {
@@ -65,7 +63,7 @@ namespace IsItMyTurn.Droid
             return response.IsSuccessStatusCode;
         }
 
-        internal static string GetSha256HashForId(string text)
+        private static string GetSha256HashForId(string text)
         {
             if (string.IsNullOrEmpty(text))
             {

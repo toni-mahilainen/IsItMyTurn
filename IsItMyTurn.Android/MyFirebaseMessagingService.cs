@@ -13,7 +13,6 @@ namespace FCMSample.Droid
     [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
     public class MyFirebaseMessagingService : FirebaseMessagingService
     {
-        const string TAG = "MyFirebaseMsgService";
         public const string PRIMARY_CHANNEL = "default";
 
         // [START receive_message]

@@ -38,6 +38,7 @@ namespace IsItMyTurn.Pages
             {
                 string json = await response.Content.ReadAsStringAsync();
                 List<CompletedShift> completedShiftsList = JsonConvert.DeserializeObject<List<CompletedShift>>(json);
+
                 // List object for list of shift. Date to string
                 List<CompletedShift> newCompeletedShiftsList = new List<CompletedShift>();
 

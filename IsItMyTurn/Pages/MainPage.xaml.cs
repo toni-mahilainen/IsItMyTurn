@@ -19,6 +19,9 @@ namespace IsItMyTurn
         public MainPage()
         {
             InitializeComponent();
+
+            //AppNameLbl.FontSize = Device.RuntimePlatform == Device.iOS ? 24 :
+            //    Device.RuntimePlatform == Device.Android ? Device.GetNamedSize(NamedSize.Title, AppNameLbl) : Device.GetNamedSize(NamedSize.Title, AppNameLbl);
         }
 
         protected override void OnAppearing()

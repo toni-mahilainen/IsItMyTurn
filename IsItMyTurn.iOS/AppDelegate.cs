@@ -92,7 +92,7 @@ namespace IsItMyTurn.iOS
 
         public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
         {
-            base.FailedToRegisterForRemoteNotifications(application, error);
+            FailedToRegisterForRemoteNotifications(application, error);
         }
 
         public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)

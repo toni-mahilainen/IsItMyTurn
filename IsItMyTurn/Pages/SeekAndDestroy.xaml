@@ -16,33 +16,24 @@
                 HorizontalTextAlignment="Center"
                 HorizontalOptions="FillAndExpand"/>
             <Label 
-                Text="Leikkuiden selaus/poisto"
+                Text="Kirjausten selaus/poisto"
                 FontSize="Title"
                 VerticalOptions="Center" 
                 HorizontalOptions="CenterAndExpand"
                 Padding="20"/>
             <StackLayout VerticalOptions="Fill">
                 <Label 
-                    Text="Tehdyt leikkuut"
+                    Text="Tehdyt kirjaukset"
                     FontSize="Large"
                     HorizontalOptions="CenterAndExpand"/>
                 <ScrollView VerticalOptions="Start">
-                    <ListView x:Name="listView" ItemsSource="{Binding CompletedShiftList}" ItemTapped="listView_ItemTapped" HorizontalScrollBarVisibility="Always">
+                    <ListView x:Name="listView" ItemTapped="listView_ItemTapped" HorizontalScrollBarVisibility="Always">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <TextCell
                                     x:Name="ShiftCell"
                                     Text="{Binding ApartmentName, StringFormat='Asunto: {0}'}" 
-                                    Detail="{Binding Date, StringFormat='Leikkuu ajankohta: {0}'}"/>
-                                <!--<ViewCell>
-                                    <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
-                                        <StackLayout Orientation="Vertical" Padding="0,0,0,0" HeightRequest="200">
-                                            <Label x:Name="ShiftIdLbl" Text="{Binding ShiftId}" IsVisible="False"/>
-                                            <Label Text="{Binding ApartmentName, StringFormat='Asunto: {0}'}" HorizontalOptions="Center"/>
-                                            <Label Text="{Binding Date, StringFormat='Leikkuu ajankohta: {0}'}" HorizontalOptions="Center"/>
-                                        </StackLayout>
-                                    </StackLayout>
-                                </ViewCell>-->
+                                    Detail="{Binding DateStr, StringFormat='Leikkuu ajankohta: {0}'}"/>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>

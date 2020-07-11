@@ -46,24 +46,55 @@ namespace IsItMyTurn
 
         private async void AddBtn_Clicked(object sender, EventArgs e)
         {
-            ViewModels.Apartment item = (ViewModels.Apartment)ApartmentPicker.SelectedItem;
-
-            NewShift newShift = new NewShift()
+            try
             {
-                ApartmentId = item.ApartmentId,
-                Date = DatePicker.Date
-            };
+                // If Firebase Cloud Messaging token exists, new shift data will be sent to backend
+                var FCMToken = Application.Current.Properties.Keys.Contains("Fcmtoken");
+                if (FCMToken)
+                {
+                    Apartment item = (Apartment)ApartmentPicker.SelectedItem;
 
-            string json = JsonConvert.SerializeObject(newShift);
-            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.PostAsync("https://isitmyturnapi.azurewebsites.net/api/completedshift", content);
+                    NewShift newShift = new NewShift()
+                    {
+                        ApartmentId = item.ApartmentId,
+                        Date = DatePicker.Date
+                    };
 
-            if (response.IsSuccessStatusCode)
+                    string json = JsonConvert.SerializeObject(newShift);
+                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    HttpClient client = new HttpClient();
+                    HttpResponseMessage response = await client.PostAsync("https://isitmyturnapi.azurewebsites.net/api/completedshift", content);
+                    int status = (int)response.StatusCode;
+                    
+                    // Status codes:
+                    // 200 - Everything OK
+                    // 201 - A shift has added successfully. Some problems with notifications
+                    if (status == 200)
+                    {
+                        await DisplayAlert("Is It My Turn", "Vuoron lisäys onnistui!", "OK");
+                        await Navigation.PopToRootAsync();
+                    }
+                    else if (status == 201)
+                    {
+                        await DisplayAlert("Is It My Turn",
+                            "Vuoron lisäys onnistui, mutta ilmoitusten lähettämisessä käyttäjille ilmeni ongelmia.\r\n\r\n" +
+                            "Käytä WhatsApp-ryhmää vuoron vaihdon ilmoittamiseen ja ota yhteyttä sovelluksen ylläpitäjään.", "OK");
+                        await Navigation.PopToRootAsync();
+                    }
+                    else
+                    {
+                        await DisplayAlert("Is It My Turn", "Tapahtui virhe lisätessä vuoroa. Ole hyvä ja yritä uudelleen.\r\nJos ongelma ei poistu, ota yhteyttä sovelluksen ylläpitäjään.", "OK");
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("Is It My Turn", "Tapahtui virhe lisätessä vuoroa. Ole hyvä ja yritä uudelleen.\r\nJos ongelma ei poistu, ota yhteyttä sovelluksen ylläpitäjään.", "OK");
+                }
+            }
+            catch (Exception ex)
             {
-                await DisplayAlert("Is It My Turn", "Suoritetun vuoron lisäys onnistui!", "OK");
-                await Navigation.PopToRootAsync();
+                System.Diagnostics.Debug.WriteLine($"######Error###### : {ex.Message}");
             }
         }
 

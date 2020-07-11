@@ -28,12 +28,9 @@
             <StackLayout VerticalOptions="CenterAndExpand">
                 <Label 
                     Text="Leikkuuvuorossa:"
-                    FontSize="Title"
                     FontAttributes="Bold"
                     TextColor="White"
                     HorizontalOptions="Center">
-                    <!--AbsoluteLayout.LayoutBounds="0.5, 0.15, 1, 0.1"
-                    AbsoluteLayout.LayoutFlags="All">-->
                     <Label.FontSize>
                         <OnPlatform x:TypeArguments="x:Double">
                             <On Platform="Android" Value="{im:NamedSize Large, TargetType=Label}" />
@@ -46,12 +43,10 @@
                     FontSize="Header"
                     TextColor="White"
                     HorizontalOptions="Center">
-                            <!--AbsoluteLayout.LayoutBounds="0.5, 0.29, 1, 0.3"
-                    AbsoluteLayout.LayoutFlags="All">-->
                     <Label.FontSize>
                         <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="{im:TextSize 0.06, TargetType=Label}" />
-                            <On Platform="iOS" Value="{im:TextSize 0.05, TargetType=Label}" />
+                            <On Platform="Android" Value="{im:PercentOfHeight 0.06, TargetType=Label}" />
+                            <On Platform="iOS" Value="{im:PercentOfHeight 0.05, TargetType=Label}" />
                         </OnPlatform>
                     </Label.FontSize>
                 </Label>

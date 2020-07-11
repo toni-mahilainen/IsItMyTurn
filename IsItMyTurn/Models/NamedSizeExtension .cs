@@ -22,7 +22,7 @@ namespace IsItMyTurn.Models
     }
 
     [ContentProperty(nameof(Percent))]
-    public class TextSizeExtension : IMarkupExtension
+    public class PercentOfHeightExtension : IMarkupExtension
     {
         public float Percent { get; set; }
 
@@ -32,6 +32,20 @@ namespace IsItMyTurn.Models
         public object ProvideValue(IServiceProvider serviceProvider)
         {
             return DeviceDisplay.MainDisplayInfo.Height * Percent;
+        }
+    }
+
+    [ContentProperty(nameof(Percent))]
+    public class PercentOfWidthExtension : IMarkupExtension
+    {
+        public float Percent { get; set; }
+
+        [System.ComponentModel.TypeConverter(typeof(TypeTypeConverter))]
+        public Type TargetType { get; set; }
+
+        public object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return DeviceDisplay.MainDisplayInfo.Width * Percent;
         }
     }
 }

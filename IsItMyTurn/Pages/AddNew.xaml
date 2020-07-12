@@ -6,8 +6,8 @@
              xmlns:im="clr-namespace:IsItMyTurn.Models"
              mc:Ignorable="d"
              x:Class="IsItMyTurn.AddNew">
-    <ContentPage.Content>
-    <AbsoluteLayout>
+    <!--Can´t use the AbsoluteLayout on this page. Picker and DatePicker won´t work in AbsoluteLayout for some reason.-->
+    <RelativeLayout>
         <Image Source="background.jpg" Aspect="Fill"/>
         <Label 
             x:Name="AppNameLbl"
@@ -16,8 +16,12 @@
             TextColor="White"
             HorizontalTextAlignment="Center"
             VerticalTextAlignment="Center"
-            AbsoluteLayout.LayoutBounds="0.5, 0.01, 1, 0.05"
-            AbsoluteLayout.LayoutFlags="All">
+            RelativeLayout.HeightConstraint=
+            "{ConstraintExpression Type=Constant, Property=Height, Constant={im:PercentOfHeight 0.04, TargetType=Label}}"
+            RelativeLayout.YConstraint=
+            "{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=1, Constant={im:PercentOfHeight 0.01, TargetType=Label}}" 
+            RelativeLayout.WidthConstraint=
+            "{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}">
             <Label.FontSize>
                 <OnPlatform x:TypeArguments="x:Double">
                     <On Platform="Android" Value="{im:NamedSize Title, TargetType=Label}" />
@@ -25,7 +29,9 @@
                 </OnPlatform>
             </Label.FontSize>
         </Label>
-        <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.15, 1, 0.5" AbsoluteLayout.LayoutFlags="All">
+        <StackLayout 
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=AppNameLbl, Property=Y, Factor=1, Constant={im:PercentOfHeight 0.05, TargetType=StackLayout}}" 
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}">
             <StackLayout VerticalOptions="CenterAndExpand">
                 <Label 
                     Text="Tehdyn leikkuun lisäys"
@@ -78,7 +84,9 @@
                     HorizontalOptions="Center"/>
             </StackLayout>
         </StackLayout>
-        <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 0.95" AbsoluteLayout.LayoutFlags="All">
+        <StackLayout 
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.95}" 
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}">
             <StackLayout VerticalOptions="EndAndExpand">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                     <Button 
@@ -129,13 +137,12 @@
                     Clicked="ToMainPageBtn_Clicked">
                     <Button.WidthRequest>
                         <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="{im:PercentOfWidth 0.5, TargetType=Button}"/>
-                            <On Platform="iOS" Value="{im:PercentOfWidth 0.5, TargetType=Button}"/>
+                            <On Platform="Android" Value="{im:PercentOfWidth 0.4, TargetType=Button}"/>
+                            <On Platform="iOS" Value="{im:PercentOfWidth 0.4, TargetType=Button}"/>
                         </OnPlatform>
                     </Button.WidthRequest>
                 </Button>
             </StackLayout>
         </StackLayout>
-    </AbsoluteLayout>
-    </ContentPage.Content>
+    </RelativeLayout>
 </ContentPage>

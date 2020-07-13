@@ -3,10 +3,140 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:im="clr-namespace:IsItMyTurn.Models"
              mc:Ignorable="d"
              x:Class="IsItMyTurn.Pages.EditPage">
-    <ContentPage.Content>
-        <StackLayout>
+    <AbsoluteLayout>
+        <Image Source="background.jpg" Aspect="Fill"/>
+        <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0, 1, 0.95" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Fill">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Button 
+                        x:Name="UpdateBtn"
+                        Text="Päivitä"
+                        TextColor="White"
+                        BackgroundColor="Black"
+                        BorderColor="White"
+                        BorderWidth="3"
+                        CornerRadius="15"
+                        Opacity=".7"
+                        Clicked="UpdateBtn_Clicked">
+                        <Button.WidthRequest>
+                            <OnPlatform x:TypeArguments="x:Double">
+                                <On Platform="Android" Value="{im:PercentOfWidth 0.2, TargetType=Button}"/>
+                                <On Platform="iOS" Value="{im:PercentOfWidth 0.2, TargetType=Button}"/>
+                            </OnPlatform>
+                        </Button.WidthRequest>
+                    </Button>
+                    <Button
+                        x:Name="CancelBtn"
+                        Text="Peruuta"
+                        TextColor="White"
+                        BackgroundColor="Black"
+                        BorderColor="White"
+                        BorderWidth="3"
+                        CornerRadius="15"
+                        Opacity=".7"
+                        Clicked="CancelBtn_Clicked">
+                        <Button.WidthRequest>
+                            <OnPlatform x:TypeArguments="x:Double">
+                                <On Platform="Android" Value="{im:PercentOfWidth 0.2, TargetType=Button}"/>
+                                <On Platform="iOS" Value="{im:PercentOfWidth 0.2, TargetType=Button}"/>
+                            </OnPlatform>
+                        </Button.WidthRequest>
+                    </Button>
+                </StackLayout>
+                <Button
+                    x:Name="ToMainPageBtn"
+                    Text="Takaisin etusivulle"
+                    TextColor="White"
+                    BackgroundColor="Black"
+                    BorderColor="White"
+                    BorderWidth="3"
+                    CornerRadius="15"
+                    Opacity=".7"
+                    HorizontalOptions="Center"
+                    Clicked="ToMainPageBtn_Clicked">
+                    <Button.WidthRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="{im:PercentOfWidth 0.4, TargetType=Button}"/>
+                            <On Platform="iOS" Value="{im:PercentOfWidth 0.4, TargetType=Button}"/>
+                        </OnPlatform>
+                    </Button.WidthRequest>
+                </Button>
+            </StackLayout>
+        </StackLayout>
+        <Label 
+            x:Name="AppNameLbl"
+            Text="Is It My Turn"
+            FontAttributes="Bold"
+            TextColor="White"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            AbsoluteLayout.LayoutBounds="0.5, 0.01, 1, 0.1"
+            AbsoluteLayout.LayoutFlags="All">
+            <Label.FontSize>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="Android" Value="{im:NamedSize Title, TargetType=Label}" />
+                    <On Platform="iOS" Value="{im:NamedSize Title, TargetType=Label}" />
+                </OnPlatform>
+            </Label.FontSize>
+        </Label>
+        <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.18, 1, 0.4" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <Label 
+                    Text="Tehdyn leikkuun tietojen muokkaus"
+                    TextColor="White"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="CenterAndExpand"
+                    Padding="30">
+                    <Label.FontSize>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="{im:NamedSize Title, TargetType=Label}" />
+                            <On Platform="iOS" Value="{im:NamedSize Title, TargetType=Label}" />
+                        </OnPlatform>
+                    </Label.FontSize>
+                </Label>
+                <Label 
+                    Text="Valitse leikkuun suorittanut asunto"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    HorizontalOptions="Center">
+                    <Label.FontSize>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="{im:NamedSize Large, TargetType=Label}" />
+                            <On Platform="iOS" Value="{im:NamedSize Subtitle, TargetType=Label}" />
+                        </OnPlatform>
+                    </Label.FontSize>
+                </Label>
+                <Picker 
+                    x:Name="ApartmentPicker" 
+                    Title="Valitse asunto"
+                    TitleColor="White"
+                    HorizontalOptions="Center"
+                    ItemsSource="{Binding ApartmentList}"
+                    ItemDisplayBinding="{Binding ApartmentName}"
+                    SelectedItem="{Binding SelectedItem}"/>
+                <Label 
+                    Text="Valitse suoritetun leikkuun ajankohta"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    HorizontalOptions="Center">
+                    <Label.FontSize>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="{im:NamedSize Large, TargetType=Label}" />
+                            <On Platform="iOS" Value="{im:NamedSize Subtitle, TargetType=Label}" />
+                        </OnPlatform>
+                    </Label.FontSize>
+                </Label>
+                <DatePicker 
+                    x:Name="DatePicker"
+                    TextColor="White"
+                    HorizontalOptions="Center"/>
+            </StackLayout>
+        </StackLayout>
+    </AbsoluteLayout>
+        <!--<StackLayout>
             <Label 
                 Text="Is It My Turn"
                 FontSize="Title"
@@ -56,6 +186,5 @@
                 x:Name="ToMainPageBtn"
                 VerticalOptions="End"
                 Clicked="ToMainPageBtn_Clicked"/>
-        </StackLayout>
-    </ContentPage.Content>
+        </StackLayout>-->
 </ContentPage>

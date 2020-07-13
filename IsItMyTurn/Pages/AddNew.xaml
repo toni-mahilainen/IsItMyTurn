@@ -6,88 +6,10 @@
              xmlns:im="clr-namespace:IsItMyTurn.Models"
              mc:Ignorable="d"
              x:Class="IsItMyTurn.AddNew">
-    <!--Can´t use the AbsoluteLayout on this page. Picker and DatePicker won´t work in AbsoluteLayout for some reason.-->
-    <RelativeLayout>
+    <AbsoluteLayout>
         <Image Source="background.jpg" Aspect="Fill"/>
-        <Label 
-            x:Name="AppNameLbl"
-            Text="Is It My Turn"
-            FontAttributes="Bold"
-            TextColor="White"
-            HorizontalTextAlignment="Center"
-            VerticalTextAlignment="Center"
-            RelativeLayout.HeightConstraint=
-            "{ConstraintExpression Type=Constant, Property=Height, Constant={im:PercentOfHeight 0.04, TargetType=Label}}"
-            RelativeLayout.YConstraint=
-            "{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=1, Constant={im:PercentOfHeight 0.01, TargetType=Label}}" 
-            RelativeLayout.WidthConstraint=
-            "{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}">
-            <Label.FontSize>
-                <OnPlatform x:TypeArguments="x:Double">
-                    <On Platform="Android" Value="{im:NamedSize Title, TargetType=Label}" />
-                    <On Platform="iOS" Value="{im:NamedSize Title, TargetType=Label}" />
-                </OnPlatform>
-            </Label.FontSize>
-        </Label>
-        <StackLayout 
-            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=AppNameLbl, Property=Y, Factor=1, Constant={im:PercentOfHeight 0.05, TargetType=StackLayout}}" 
-            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}">
-            <StackLayout VerticalOptions="CenterAndExpand">
-                <Label 
-                    Text="Tehdyn leikkuun lisäys"
-                    TextColor="White"
-                    VerticalOptions="Center" 
-                    HorizontalOptions="CenterAndExpand"
-                    Padding="30">
-                    <Label.FontSize>
-                        <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="{im:NamedSize Title, TargetType=Label}" />
-                            <On Platform="iOS" Value="{im:NamedSize Title, TargetType=Label}" />
-                        </OnPlatform>
-                    </Label.FontSize>
-                </Label>
-                <Label 
-                    Text="Valitse leikkuun suorittanut asunto"
-                    FontAttributes="Bold"
-                    TextColor="White"
-                    HorizontalOptions="Center">
-                    <Label.FontSize>
-                        <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="{im:NamedSize Large, TargetType=Label}" />
-                            <On Platform="iOS" Value="{im:NamedSize Subtitle, TargetType=Label}" />
-                        </OnPlatform>
-                    </Label.FontSize>
-                </Label>
-                <Picker 
-                    x:Name="ApartmentPicker" 
-                    Title="Valitse asunto"
-                    TitleColor="White"
-                    HorizontalOptions="Center"
-                    ItemsSource="{Binding ApartmentList}"
-                    ItemDisplayBinding="{Binding ApartmentName}"
-                    SelectedItem="{Binding SelectedItem}"/>
-                <Label 
-                    Text="Valitse suoritetun leikkuun ajankohta"
-                    FontAttributes="Bold"
-                    TextColor="White"
-                    HorizontalOptions="Center">
-                    <Label.FontSize>
-                        <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="{im:NamedSize Large, TargetType=Label}" />
-                            <On Platform="iOS" Value="{im:NamedSize Subtitle, TargetType=Label}" />
-                        </OnPlatform>
-                    </Label.FontSize>
-                </Label>
-                <DatePicker 
-                    x:Name="DatePicker"
-                    TextColor="White"
-                    HorizontalOptions="Center"/>
-            </StackLayout>
-        </StackLayout>
-        <StackLayout 
-            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.95}" 
-            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}">
-            <StackLayout VerticalOptions="EndAndExpand">
+        <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0, 1, 0.95" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Fill">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                     <Button 
                         x:Name="AddBtn"
@@ -144,5 +66,74 @@
                 </Button>
             </StackLayout>
         </StackLayout>
-    </RelativeLayout>
+        <Label 
+            x:Name="AppNameLbl"
+            Text="Is It My Turn"
+            FontAttributes="Bold"
+            TextColor="White"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            AbsoluteLayout.LayoutBounds="0.5, 0.01, 1, 0.1"
+            AbsoluteLayout.LayoutFlags="All">
+            <Label.FontSize>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="Android" Value="{im:NamedSize Title, TargetType=Label}" />
+                    <On Platform="iOS" Value="{im:NamedSize Title, TargetType=Label}" />
+                </OnPlatform>
+            </Label.FontSize>
+        </Label>
+        <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.18, 1, 0.4" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <Label 
+                    Text="Tehdyn leikkuun lisäys"
+                    TextColor="White"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="CenterAndExpand"
+                    Padding="30">
+                    <Label.FontSize>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="{im:NamedSize Title, TargetType=Label}" />
+                            <On Platform="iOS" Value="{im:NamedSize Title, TargetType=Label}" />
+                        </OnPlatform>
+                    </Label.FontSize>
+                </Label>
+                <Label 
+                    Text="Valitse leikkuun suorittanut asunto"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    HorizontalOptions="Center">
+                    <Label.FontSize>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="{im:NamedSize Large, TargetType=Label}" />
+                            <On Platform="iOS" Value="{im:NamedSize Subtitle, TargetType=Label}" />
+                        </OnPlatform>
+                    </Label.FontSize>
+                </Label>
+                <Picker 
+                    x:Name="ApartmentPicker" 
+                    Title="Valitse asunto"
+                    TitleColor="White"
+                    HorizontalOptions="Center"
+                    ItemsSource="{Binding ApartmentList}"
+                    ItemDisplayBinding="{Binding ApartmentName}"
+                    SelectedItem="{Binding SelectedItem}"/>
+                <Label 
+                    Text="Valitse suoritetun leikkuun ajankohta"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    HorizontalOptions="Center">
+                    <Label.FontSize>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="{im:NamedSize Large, TargetType=Label}" />
+                            <On Platform="iOS" Value="{im:NamedSize Subtitle, TargetType=Label}" />
+                        </OnPlatform>
+                    </Label.FontSize>
+                </Label>
+                <DatePicker 
+                    x:Name="DatePicker"
+                    TextColor="White"
+                    HorizontalOptions="Center"/>
+            </StackLayout>
+        </StackLayout>
+    </AbsoluteLayout>
 </ContentPage>

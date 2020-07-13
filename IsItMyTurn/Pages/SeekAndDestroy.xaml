@@ -62,7 +62,9 @@
                 </OnPlatform>
             </Label.FontSize>
         </Label>
-        <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.51, 1, 0.55" AbsoluteLayout.LayoutFlags="All">
+        <StackLayout 
+            AbsoluteLayout.LayoutBounds="0.5, 0.51, 1, 0.55" 
+            AbsoluteLayout.LayoutFlags="All">
             <Label 
                 Text="Tehdyt kirjaukset"
                 TextColor="White"
@@ -76,18 +78,29 @@
                     </OnPlatform>
                 </Label.FontSize>
             </Label>
-            <ListView BackgroundColor="Transparent" Margin="10,0,10,0" x:Name="listView" ItemTapped="listView_ItemTapped">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell
-                            x:Name="ShiftCell"
-                            TextColor="White"
-                            DetailColor="White"
-                            Text="{Binding ApartmentName, StringFormat='Asunto: {0}'}" 
-                            Detail="{Binding DateStr, StringFormat='Leikkuu ajankohta: {0}'}"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <Frame
+                HorizontalOptions="Center"
+                BackgroundColor="Black" 
+                Opacity="0.5"
+                CornerRadius="15"
+                Margin="5,0,5,0">
+                <ListView 
+                    x:Name="listView" 
+                    SeparatorColor="White" 
+                    ItemTapped="listView_ItemTapped" 
+                    IsPullToRefreshEnabled="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell
+                                x:Name="ShiftCell"
+                                TextColor="White"
+                                DetailColor="White"
+                                Text="{Binding ApartmentName, StringFormat='Asunto: {0}'}" 
+                                Detail="{Binding DateStr, StringFormat='Leikkuu ajankohta: {0}'}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
             <StackLayout Orientation="Horizontal" Margin="10,0,10,10">
                 <Button 
                     x:Name="EditShiftBtn"

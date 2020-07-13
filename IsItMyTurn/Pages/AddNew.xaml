@@ -82,64 +82,93 @@
                 </OnPlatform>
             </Label.FontSize>
         </Label>
-        <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.18, 1, 0.4" AbsoluteLayout.LayoutFlags="All">
-            <StackLayout VerticalOptions="CenterAndExpand">
-                <Label 
-                    Text="Tehdyn leikkuun lisäys"
-                    TextColor="White"
-                    HorizontalTextAlignment="Center"
-                    VerticalOptions="Center" 
-                    HorizontalOptions="CenterAndExpand"
-                    Padding="30">
-                    <Label.FontSize>
-                        <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="{im:NamedSize Title, TargetType=Label}" />
-                            <On Platform="iOS" Value="{im:NamedSize Title, TargetType=Label}" />
-                        </OnPlatform>
-                    </Label.FontSize>
-                </Label>
-                <Label 
-                    Text="Valitse leikkuun suorittanut asunto"
-                    FontAttributes="Bold"
-                    TextColor="White"
-                    HorizontalTextAlignment="Center"
-                    HorizontalOptions="Center">
-                    <Label.FontSize>
-                        <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="{im:NamedSize Large, TargetType=Label}" />
-                            <On Platform="iOS" Value="{im:NamedSize Subtitle, TargetType=Label}" />
-                        </OnPlatform>
-                    </Label.FontSize>
-                </Label>
+        <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.22, 1, 0.5" AbsoluteLayout.LayoutFlags="All">
+            <Label 
+                Text="Tehdyn leikkuun lisäys"
+                TextColor="White"
+                HorizontalTextAlignment="Center"
+                VerticalOptions="Center" 
+                HorizontalOptions="CenterAndExpand"
+                Padding="30">
+                <Label.FontSize>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android" Value="{im:NamedSize Title, TargetType=Label}" />
+                        <On Platform="iOS" Value="{im:NamedSize Title, TargetType=Label}" />
+                    </OnPlatform>
+                </Label.FontSize>
+            </Label>
+            <Label 
+                Text="Valitse leikkuun suorittanut asunto"
+                FontAttributes="Bold"
+                TextColor="White"
+                HorizontalTextAlignment="Center"
+                HorizontalOptions="Center">
+                <Label.FontSize>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android" Value="{im:NamedSize Medium, TargetType=Label}" />
+                        <On Platform="iOS" Value="{im:NamedSize Medium, TargetType=Label}" />
+                    </OnPlatform>
+                </Label.FontSize>
+            </Label>
+            <Frame
+                HorizontalOptions="Center"
+                BackgroundColor="Black" 
+                Opacity="0.5"
+                CornerRadius="15"
+                Padding="5"
+                Margin="5">
                 <Picker 
                     x:Name="ApartmentPicker" 
                     Title="Valitse asunto"
                     TitleColor="White"
                     TextColor="White"
-                    BackgroundColor="Transparent"
+                    FontAttributes="Bold"
                     HorizontalOptions="Center"
                     ItemsSource="{Binding ApartmentList}"
                     ItemDisplayBinding="{Binding ApartmentName}"
-                    SelectedItem="{Binding SelectedItem}"/>
-                <Label 
-                    Text="Valitse suoritetun leikkuun ajankohta"
-                    FontAttributes="Bold"
-                    TextColor="White"
-                    HorizontalTextAlignment="Center"
-                    HorizontalOptions="Center">
-                    <Label.FontSize>
+                    SelectedItem="{Binding SelectedItem}">
+                    <Picker.HeightRequest>
                         <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="{im:NamedSize Large, TargetType=Label}" />
-                            <On Platform="iOS" Value="{im:NamedSize Subtitle, TargetType=Label}" />
+                            <On Platform="Android" Value="{im:PercentOfWidth 0.06, TargetType=Picker}"/>
+                            <On Platform="iOS" Value="{im:PercentOfWidth 0.1, TargetType=Picker}"/>
                         </OnPlatform>
-                    </Label.FontSize>
-                </Label>
-                <DatePicker 
+                    </Picker.HeightRequest>
+                </Picker>
+            </Frame>
+            <Label 
+                Text="Valitse suoritetun leikkuun ajankohta"
+                FontAttributes="Bold"
+                TextColor="White"
+                HorizontalTextAlignment="Center"
+                HorizontalOptions="Center">
+                <Label.FontSize>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android" Value="{im:NamedSize Medium, TargetType=Label}" />
+                        <On Platform="iOS" Value="{im:NamedSize Medium, TargetType=Label}" />
+                    </OnPlatform>
+                </Label.FontSize>
+            </Label>
+            <Frame 
+                HorizontalOptions="Center"
+                BackgroundColor="Black" 
+                Opacity="0.5"
+                CornerRadius="15"
+                Padding="5"
+                Margin="5">
+                <DatePicker
                     x:Name="DatePicker"
                     TextColor="White"
-                    BackgroundColor="Transparent"
-                    HorizontalOptions="Center"/>
-            </StackLayout>
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    WidthRequest="105">
+                    <DatePicker.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="{im:PercentOfWidth 0.06, TargetType=DatePicker}"/>
+                            <On Platform="iOS" Value="{im:PercentOfWidth 0.1, TargetType=DatePicker}"/>
+                        </OnPlatform>
+                    </DatePicker.HeightRequest>
+                </DatePicker>
+            </Frame>
         </StackLayout>
     </AbsoluteLayout>
 </ContentPage>

@@ -134,6 +134,7 @@ namespace IsItMyTurn.Pages
             CompletedShift item = (CompletedShift)listView.SelectedItem;
 
             var editPage = new EditPage(item);
+            NavigationPage.SetHasNavigationBar(editPage, false);
             Navigation.PushAsync(editPage);
         }
     }

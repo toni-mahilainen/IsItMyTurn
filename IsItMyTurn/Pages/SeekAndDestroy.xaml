@@ -8,6 +8,30 @@
              x:Class="IsItMyTurn.Pages.SeekAndDestroy">
     <AbsoluteLayout>
         <Image Source="background.jpg" Aspect="Fill"/>
+        <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0, 0.8, 0.98" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Fill">
+                <Button 
+                x:Name="AddNewBtn"
+                Text="Lisää uusi"
+                TextColor="White"
+                BackgroundColor="Black"
+                BorderColor="White"
+                BorderWidth="3"
+                CornerRadius="15"
+                Opacity=".7"
+                Clicked="AddNewBtn_Clicked"/>
+                <Button
+                x:Name="ToMainPageBtn"
+                Text="Takaisin etusivulle"
+                TextColor="White"
+                BackgroundColor="Black"
+                BorderColor="White"
+                BorderWidth="3"
+                CornerRadius="15"
+                Opacity=".7"
+                Clicked="ToMainPageBtn_Clicked"/>
+            </StackLayout>
+        </StackLayout>
         <Label 
             x:Name="AppNameLbl"
             Text="Is It My Turn"
@@ -33,39 +57,38 @@
             AbsoluteLayout.LayoutFlags="All">
             <Label.FontSize>
                 <OnPlatform x:TypeArguments="x:Double">
-                    <On Platform="Android" Value="{im:NamedSize Title, TargetType=Label}" />
-                    <On Platform="iOS" Value="{im:NamedSize Title, TargetType=Label}" />
+                    <On Platform="Android" Value="{im:NamedSize Large, TargetType=Label}" />
+                    <On Platform="iOS" Value="{im:NamedSize Large, TargetType=Label}" />
                 </OnPlatform>
             </Label.FontSize>
         </Label>
-        <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.51, 1, 0.6" AbsoluteLayout.LayoutFlags="All">
+        <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.51, 1, 0.55" AbsoluteLayout.LayoutFlags="All">
             <Label 
                 Text="Tehdyt kirjaukset"
                 TextColor="White"
-                FontSize="Large"
+                Margin="10,0,10,0"
+                FontAttributes="Bold"
                 HorizontalTextAlignment="Center">
                 <Label.FontSize>
                     <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="Android" Value="{im:NamedSize Large, TargetType=Label}" />
-                        <On Platform="iOS" Value="{im:NamedSize Subtitle, TargetType=Label}" />
+                        <On Platform="Android" Value="{im:NamedSize Medium, TargetType=Label}" />
+                        <On Platform="iOS" Value="{im:NamedSize Body, TargetType=Label}" />
                     </OnPlatform>
                 </Label.FontSize>
             </Label>
-            <ScrollView>
-                <ListView x:Name="listView" ItemTapped="listView_ItemTapped">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextCell
-                                x:Name="ShiftCell"
-                                TextColor="White"
-                                DetailColor="White"
-                                Text="{Binding ApartmentName, StringFormat='Asunto: {0}'}" 
-                                Detail="{Binding DateStr, StringFormat='Leikkuu ajankohta: {0}'}"/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </ScrollView>
-            <StackLayout Orientation="Horizontal">
+            <ListView BackgroundColor="Transparent" Margin="10,0,10,0" x:Name="listView" ItemTapped="listView_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell
+                            x:Name="ShiftCell"
+                            TextColor="White"
+                            DetailColor="White"
+                            Text="{Binding ApartmentName, StringFormat='Asunto: {0}'}" 
+                            Detail="{Binding DateStr, StringFormat='Leikkuu ajankohta: {0}'}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Orientation="Horizontal" Margin="10,0,10,10">
                 <Button 
                     x:Name="EditShiftBtn"
                     Text="Muokkaa"
@@ -106,27 +129,6 @@
                 </Button>
             </StackLayout>
         </StackLayout>
-        <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.95, 0.8, 0.1" AbsoluteLayout.LayoutFlags="All">
-            <Button 
-                x:Name="AddNewBtn"
-                Text="Lisää uusi"
-                TextColor="White"
-                BackgroundColor="Black"
-                BorderColor="White"
-                BorderWidth="3"
-                CornerRadius="15"
-                Opacity=".7"
-                Clicked="AddNewBtn_Clicked"/>
-            <Button
-                x:Name="ToMainPageBtn"
-                Text="Takaisin etusivulle"
-                TextColor="White"
-                BackgroundColor="Black"
-                BorderColor="White"
-                BorderWidth="3"
-                CornerRadius="15"
-                Opacity=".7"
-                Clicked="ToMainPageBtn_Clicked"/>
-        </StackLayout>
+
     </AbsoluteLayout>
 </ContentPage>

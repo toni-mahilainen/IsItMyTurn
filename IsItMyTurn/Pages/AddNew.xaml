@@ -87,6 +87,7 @@
                 <Label 
                     Text="Tehdyn leikkuun lisäys"
                     TextColor="White"
+                    HorizontalTextAlignment="Center"
                     VerticalOptions="Center" 
                     HorizontalOptions="CenterAndExpand"
                     Padding="30">
@@ -101,6 +102,7 @@
                     Text="Valitse leikkuun suorittanut asunto"
                     FontAttributes="Bold"
                     TextColor="White"
+                    HorizontalTextAlignment="Center"
                     HorizontalOptions="Center">
                     <Label.FontSize>
                         <OnPlatform x:TypeArguments="x:Double">
@@ -113,6 +115,8 @@
                     x:Name="ApartmentPicker" 
                     Title="Valitse asunto"
                     TitleColor="White"
+                    TextColor="White"
+                    BackgroundColor="Transparent"
                     HorizontalOptions="Center"
                     ItemsSource="{Binding ApartmentList}"
                     ItemDisplayBinding="{Binding ApartmentName}"
@@ -121,6 +125,7 @@
                     Text="Valitse suoritetun leikkuun ajankohta"
                     FontAttributes="Bold"
                     TextColor="White"
+                    HorizontalTextAlignment="Center"
                     HorizontalOptions="Center">
                     <Label.FontSize>
                         <OnPlatform x:TypeArguments="x:Double">
@@ -132,6 +137,7 @@
                 <DatePicker 
                     x:Name="DatePicker"
                     TextColor="White"
+                    BackgroundColor="Transparent"
                     HorizontalOptions="Center"/>
             </StackLayout>
         </StackLayout>

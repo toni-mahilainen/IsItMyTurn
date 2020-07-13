@@ -27,9 +27,10 @@
         <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.15, 1, 0.2" AbsoluteLayout.LayoutFlags="All">
             <StackLayout VerticalOptions="CenterAndExpand">
                 <Label 
-                    Text="Leikkuuvuorossa:"
+                    Text="Leikkuuvuorossa"
                     FontAttributes="Bold"
                     TextColor="White"
+                    HorizontalTextAlignment="Center"
                     HorizontalOptions="Center">
                     <Label.FontSize>
                         <OnPlatform x:TypeArguments="x:Double">

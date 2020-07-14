@@ -8,46 +8,36 @@
              x:Class="IsItMyTurn.Pages.SeekAndDestroy">
     <AbsoluteLayout>
         <Image Source="background.jpg" Aspect="Fill"/>
+        <Image 
+            AbsoluteLayout.LayoutBounds="0.5, 0.04, 0.55, 39"
+            AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+            Source="logo.png"
+            Aspect="AspectFill">
+        </Image>
         <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0, 0.8, 0.98" AbsoluteLayout.LayoutFlags="All">
             <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Fill">
                 <Button 
-                x:Name="AddNewBtn"
-                Text="Lisää uusi"
-                TextColor="White"
-                BackgroundColor="Black"
-                BorderColor="White"
-                BorderWidth="3"
-                CornerRadius="15"
-                Opacity=".7"
-                Clicked="AddNewBtn_Clicked"/>
+                    x:Name="AddNewBtn"
+                    Text="Lisää uusi"
+                    TextColor="White"
+                    BackgroundColor="Black"
+                    BorderColor="White"
+                    BorderWidth="3"
+                    CornerRadius="15"
+                    Opacity=".7"
+                    Clicked="AddNewBtn_Clicked"/>
                 <Button
-                x:Name="ToMainPageBtn"
-                Text="Takaisin etusivulle"
-                TextColor="White"
-                BackgroundColor="Black"
-                BorderColor="White"
-                BorderWidth="3"
-                CornerRadius="15"
-                Opacity=".7"
-                Clicked="ToMainPageBtn_Clicked"/>
+                    x:Name="ToMainPageBtn"
+                    Text="Takaisin etusivulle"
+                    TextColor="White"
+                    BackgroundColor="Black"
+                    BorderColor="White"
+                    BorderWidth="3"
+                    CornerRadius="15"
+                    Opacity=".7"
+                    Clicked="ToMainPageBtn_Clicked"/>
             </StackLayout>
         </StackLayout>
-        <Label 
-            x:Name="AppNameLbl"
-            Text="Is It My Turn"
-            FontAttributes="Bold"
-            TextColor="White"
-            HorizontalTextAlignment="Center"
-            VerticalTextAlignment="Center"
-            AbsoluteLayout.LayoutBounds="0.5, 0.01, 1, 0.1"
-            AbsoluteLayout.LayoutFlags="All">
-            <Label.FontSize>
-                <OnPlatform x:TypeArguments="x:Double">
-                    <On Platform="Android" Value="{im:NamedSize Title, TargetType=Label}" />
-                    <On Platform="iOS" Value="{im:NamedSize Title, TargetType=Label}" />
-                </OnPlatform>
-            </Label.FontSize>
-        </Label>
         <Label 
             Text="Kirjausten selaus/poisto"
             TextColor="White"
@@ -83,12 +73,12 @@
                 BackgroundColor="Black" 
                 Opacity="0.5"
                 CornerRadius="15"
-                Margin="5,0,5,0">
+                Margin="5,0,5,0"
+                Padding="5">
                 <ListView 
                     x:Name="listView" 
                     SeparatorColor="White" 
-                    ItemTapped="listView_ItemTapped" 
-                    IsPullToRefreshEnabled="True">
+                    ItemTapped="listView_ItemTapped">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell

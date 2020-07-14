@@ -38,6 +38,9 @@ namespace IsItMyTurn
             if (response.IsSuccessStatusCode)
             {
                 string responseBody = await response.Content.ReadAsStringAsync();
+                LoadingLbl.IsVisible = false;
+                LoadingLblFrame.IsVisible = false;
+                CurrentShiftLbl.IsVisible = true;
                 CurrentShiftLbl.Text = responseBody;
             }
         }

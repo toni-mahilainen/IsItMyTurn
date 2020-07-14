@@ -8,6 +8,12 @@
              x:Class="IsItMyTurn.Pages.EditPage">
     <AbsoluteLayout>
         <Image Source="background.jpg" Aspect="Fill"/>
+        <Image 
+            AbsoluteLayout.LayoutBounds="0.5, 0.04, 0.55, 39"
+            AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+            Source="logo.png"
+            Aspect="AspectFill">
+        </Image>
         <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0, 1, 0.95" AbsoluteLayout.LayoutFlags="All">
             <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Fill">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
@@ -66,22 +72,6 @@
                 </Button>
             </StackLayout>
         </StackLayout>
-        <Label 
-            x:Name="AppNameLbl"
-            Text="Is It My Turn"
-            FontAttributes="Bold"
-            TextColor="White"
-            HorizontalTextAlignment="Center"
-            VerticalTextAlignment="Center"
-            AbsoluteLayout.LayoutBounds="0.5, 0.01, 1, 0.1"
-            AbsoluteLayout.LayoutFlags="All">
-            <Label.FontSize>
-                <OnPlatform x:TypeArguments="x:Double">
-                    <On Platform="Android" Value="{im:NamedSize Title, TargetType=Label}" />
-                    <On Platform="iOS" Value="{im:NamedSize Title, TargetType=Label}" />
-                </OnPlatform>
-            </Label.FontSize>
-        </Label>
         <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.22, 1, 0.5" AbsoluteLayout.LayoutFlags="All">
             <Label 
                 Text="Tehdyn leikkuun tietojen muokkaus"
@@ -92,8 +82,8 @@
                 Padding="30">
                 <Label.FontSize>
                     <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="Android" Value="{im:NamedSize Title, TargetType=Label}" />
-                        <On Platform="iOS" Value="{im:NamedSize Title, TargetType=Label}" />
+                        <On Platform="Android" Value="{im:NamedSize Large, TargetType=Label}" />
+                        <On Platform="iOS" Value="{im:NamedSize Large, TargetType=Label}" />
                     </OnPlatform>
                 </Label.FontSize>
             </Label>
@@ -130,7 +120,7 @@
                     <Picker.HeightRequest>
                         <OnPlatform x:TypeArguments="x:Double">
                             <On Platform="Android" Value="{im:PercentOfWidth 0.06, TargetType=Picker}"/>
-                            <On Platform="iOS" Value="{im:PercentOfWidth 0.1, TargetType=Picker}"/>
+                            <On Platform="iOS" Value="{im:PercentOfWidth 0.06, TargetType=Picker}"/>
                         </OnPlatform>
                     </Picker.HeightRequest>
                 </Picker>
@@ -164,7 +154,7 @@
                     <DatePicker.HeightRequest>
                         <OnPlatform x:TypeArguments="x:Double">
                             <On Platform="Android" Value="{im:PercentOfWidth 0.06, TargetType=DatePicker}"/>
-                            <On Platform="iOS" Value="{im:PercentOfWidth 0.1, TargetType=DatePicker}"/>
+                            <On Platform="iOS" Value="{im:PercentOfWidth 0.06, TargetType=DatePicker}"/>
                         </OnPlatform>
                     </DatePicker.HeightRequest>
                 </DatePicker>

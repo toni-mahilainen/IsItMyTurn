@@ -45,6 +45,7 @@ namespace IsItMyTurn.Models
 
         public object ProvideValue(IServiceProvider serviceProvider)
         {
+            System.Diagnostics.Debug.WriteLine($"######Width######  :  {DeviceDisplay.MainDisplayInfo.Density}");
             return DeviceDisplay.MainDisplayInfo.Width * Percent;
         }
     }

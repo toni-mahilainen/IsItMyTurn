@@ -106,12 +106,17 @@
                 Title="Valitse asunto"
                 TitleColor="White"
                 TextColor="White"
-                FontAttributes="Bold"
                 HorizontalOptions="Center"
                 Margin="5"
                 ItemsSource="{Binding ApartmentList}"
                 ItemDisplayBinding="{Binding ApartmentName}"
                 SelectedItem="{Binding SelectedItem}">
+                <icr:CustomPicker.FontAttributes>
+                    <OnPlatform x:TypeArguments="FontAttributes">
+                        <On Platform="Android" Value="None"/>
+                        <On Platform="iOS" Value="Bold"/>
+                    </OnPlatform>
+                </icr:CustomPicker.FontAttributes>
             </icr:CustomPicker>
             <Label 
                 Text="Valitse suoritetun leikkuun ajankohta"
@@ -129,9 +134,16 @@
             <icr:CustomDatePicker
                 x:Name="DatePicker"
                 TextColor="White"
+                FontAttributes="Bold"
                 HorizontalOptions="Center"
                 Margin="5"
                 WidthRequest="130">
+                <icr:CustomDatePicker.FontAttributes>
+                    <OnPlatform x:TypeArguments="FontAttributes">
+                        <On Platform="Android" Value="None"/>
+                        <On Platform="iOS" Value="Bold"/>
+                    </OnPlatform>
+                </icr:CustomDatePicker.FontAttributes>
             </icr:CustomDatePicker>
         </StackLayout>
     </AbsoluteLayout>

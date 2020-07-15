@@ -71,6 +71,7 @@
     <AppExtensionDebugBundleId />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CustomRenderers\CustomDatePickerIos.cs" />
     <Compile Include="CustomRenderers\CustomPickerIos.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />

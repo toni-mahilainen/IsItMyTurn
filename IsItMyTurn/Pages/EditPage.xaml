@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:im="clr-namespace:IsItMyTurn.Extensions"
+             xmlns:icr="clr-namespace:IsItMyTurn.CustomRenderers"
              mc:Ignorable="d"
              x:Class="IsItMyTurn.Pages.EditPage">
     <AbsoluteLayout>
@@ -99,7 +100,18 @@
                     </OnPlatform>
                 </Label.FontSize>
             </Label>
-            <Frame
+            <icr:CustomPicker 
+                x:Name="ApartmentPicker"
+                Title="Valitse asunto"
+                TitleColor="White"
+                TextColor="White"
+                HorizontalOptions="Center"
+                Margin="5"
+                ItemsSource="{Binding ApartmentList}"
+                ItemDisplayBinding="{Binding ApartmentName}"
+                SelectedItem="{Binding SelectedItem}">
+            </icr:CustomPicker>
+            <!--<Frame
                 HorizontalOptions="Center"
                 BackgroundColor="Black" 
                 Opacity="0.5"
@@ -123,7 +135,7 @@
                         </OnPlatform>
                     </Picker.HeightRequest>
                 </Picker>
-            </Frame>
+            </Frame>-->
             <Label 
                 Text="Valitse suoritetun leikkuun ajankohta"
                 FontAttributes="Bold"
@@ -137,7 +149,14 @@
                     </OnPlatform>
                 </Label.FontSize>
             </Label>
-            <Frame 
+            <icr:CustomDatePicker 
+                x:Name="DatePicker"
+                TextColor="White"
+                HorizontalOptions="Center"
+                Margin="5"
+                WidthRequest="130">
+            </icr:CustomDatePicker>
+            <!--<Frame 
                 HorizontalOptions="Center"
                 BackgroundColor="Black" 
                 Opacity="0.5"
@@ -157,7 +176,7 @@
                         </OnPlatform>
                     </DatePicker.HeightRequest>
                 </DatePicker>
-            </Frame>
+            </Frame>-->
         </StackLayout>
     </AbsoluteLayout>
 </ContentPage>

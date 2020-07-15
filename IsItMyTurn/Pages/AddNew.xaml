@@ -106,37 +106,13 @@
                 Title="Valitse asunto"
                 TitleColor="White"
                 TextColor="White"
+                FontAttributes="Bold"
                 HorizontalOptions="Center"
                 Margin="5"
                 ItemsSource="{Binding ApartmentList}"
                 ItemDisplayBinding="{Binding ApartmentName}"
                 SelectedItem="{Binding SelectedItem}">
             </icr:CustomPicker>
-            <!--<Frame
-                HorizontalOptions="Center"
-                BackgroundColor="Black" 
-                Opacity="0.6"
-                CornerRadius="15"
-                Padding="5"
-                Margin="5">
-                <Picker 
-                    x:Name="ApartmentPicker" 
-                    Title="Valitse asunto"
-                    TitleColor="White"
-                    TextColor="White"
-                    FontAttributes="Bold"
-                    HorizontalOptions="Center"
-                    ItemsSource="{Binding ApartmentList}"
-                    ItemDisplayBinding="{Binding ApartmentName}"
-                    SelectedItem="{Binding SelectedItem}">
-                    <Picker.HeightRequest>
-                        <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="{im:PercentOfHeight 0.08, TargetType=Picker}"/>
-                            <On Platform="iOS" Value="{im:PercentOfHeight 0.08, TargetType=Picker}"/>
-                        </OnPlatform>
-                    </Picker.HeightRequest>
-                </Picker>
-            </Frame>-->
             <Label 
                 Text="Valitse suoritetun leikkuun ajankohta"
                 FontAttributes="Bold"
@@ -150,27 +126,13 @@
                     </OnPlatform>
                 </Label.FontSize>
             </Label>
-            <Frame 
+            <icr:CustomDatePicker
+                x:Name="DatePicker"
+                TextColor="White"
                 HorizontalOptions="Center"
-                BackgroundColor="Black" 
-                Opacity="0.6"
-                CornerRadius="15"
-                Padding="5"
-                Margin="5">
-                <DatePicker
-                    x:Name="DatePicker"
-                    TextColor="White"
-                    FontAttributes="Bold"
-                    HorizontalOptions="Center"
-                    WidthRequest="105">
-                    <DatePicker.HeightRequest>
-                        <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="{im:PercentOfHeight 0.08, TargetType=DatePicker}"/>
-                            <On Platform="iOS" Value="{im:PercentOfHeight 0.08, TargetType=DatePicker}"/>
-                        </OnPlatform>
-                    </DatePicker.HeightRequest>
-                </DatePicker>
-            </Frame>
+                Margin="5"
+                WidthRequest="130">
+            </icr:CustomDatePicker>
         </StackLayout>
     </AbsoluteLayout>
 </ContentPage>

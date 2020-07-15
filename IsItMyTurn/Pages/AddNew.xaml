@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:im="clr-namespace:IsItMyTurn.Models"
+             xmlns:im="clr-namespace:IsItMyTurn.Extensions"
              mc:Ignorable="d"
              x:Class="IsItMyTurn.AddNew">
     <AbsoluteLayout>
@@ -29,8 +29,8 @@
                         Clicked="AddBtn_Clicked">
                         <Button.WidthRequest>
                             <OnPlatform x:TypeArguments="x:Double">
-                                <On Platform="Android" Value="{im:PercentOfWidth 0.2, TargetType=Button}"/>
-                                <On Platform="iOS" Value="{im:PercentOfWidth 0.2, TargetType=Button}"/>
+                                <On Platform="Android" Value="{im:PercentOfWidth 0.4, TargetType=Button}"/>
+                                <On Platform="iOS" Value="{im:PercentOfWidth 0.4, TargetType=Button}"/>
                             </OnPlatform>
                         </Button.WidthRequest>
                     </Button>
@@ -46,8 +46,8 @@
                         Clicked="CancelBtn_Clicked">
                         <Button.WidthRequest>
                             <OnPlatform x:TypeArguments="x:Double">
-                                <On Platform="Android" Value="{im:PercentOfWidth 0.2, TargetType=Button}"/>
-                                <On Platform="iOS" Value="{im:PercentOfWidth 0.2, TargetType=Button}"/>
+                                <On Platform="Android" Value="{im:PercentOfWidth 0.4, TargetType=Button}"/>
+                                <On Platform="iOS" Value="{im:PercentOfWidth 0.4, TargetType=Button}"/>
                             </OnPlatform>
                         </Button.WidthRequest>
                     </Button>
@@ -65,8 +65,8 @@
                     Clicked="ToMainPageBtn_Clicked">
                     <Button.WidthRequest>
                         <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="{im:PercentOfWidth 0.4, TargetType=Button}"/>
-                            <On Platform="iOS" Value="{im:PercentOfWidth 0.4, TargetType=Button}"/>
+                            <On Platform="Android" Value="{im:PercentOfWidth 0.8, TargetType=Button}"/>
+                            <On Platform="iOS" Value="{im:PercentOfWidth 0.8, TargetType=Button}"/>
                         </OnPlatform>
                     </Button.WidthRequest>
                 </Button>
@@ -74,7 +74,7 @@
         </StackLayout>
         <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.22, 1, 0.5" AbsoluteLayout.LayoutFlags="All">
             <Label 
-                Text="Tehdyn leikkuun lisäys"
+                Text="Uuden kirjauksen lisäys"
                 TextColor="White"
                 HorizontalTextAlignment="Center"
                 VerticalOptions="Center" 
@@ -119,8 +119,8 @@
                     SelectedItem="{Binding SelectedItem}">
                     <Picker.HeightRequest>
                         <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="{im:PercentOfWidth 0.06, TargetType=Picker}"/>
-                            <On Platform="iOS" Value="{im:PercentOfWidth 0.06, TargetType=Picker}"/>
+                            <On Platform="Android" Value="{im:PercentOfHeight 0.08, TargetType=Picker}"/>
+                            <On Platform="iOS" Value="{im:PercentOfHeight 0.08, TargetType=Picker}"/>
                         </OnPlatform>
                     </Picker.HeightRequest>
                 </Picker>
@@ -153,8 +153,8 @@
                     WidthRequest="105">
                     <DatePicker.HeightRequest>
                         <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="{im:PercentOfWidth 0.06, TargetType=DatePicker}"/>
-                            <On Platform="iOS" Value="{im:PercentOfWidth 0.06, TargetType=DatePicker}"/>
+                            <On Platform="Android" Value="{im:PercentOfHeight 0.08, TargetType=DatePicker}"/>
+                            <On Platform="iOS" Value="{im:PercentOfHeight 0.08, TargetType=DatePicker}"/>
                         </OnPlatform>
                     </DatePicker.HeightRequest>
                 </DatePicker>

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:im="clr-namespace:IsItMyTurn.Models"
+             xmlns:im="clr-namespace:IsItMyTurn.Extensions"
              mc:Ignorable="d"
              x:Class="IsItMyTurn.Pages.SeekAndDestroy">
     <AbsoluteLayout>
@@ -106,8 +106,8 @@
                     Clicked="EditShiftBtn_Clicked">
                     <Button.WidthRequest>
                         <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="{im:PercentOfWidth 0.2, TargetType=Button}"/>
-                            <On Platform="iOS" Value="{im:PercentOfWidth 0.2, TargetType=Button}"/>
+                            <On Platform="Android" Value="{im:PercentOfWidth 0.3, TargetType=Button}"/>
+                            <On Platform="iOS" Value="{im:PercentOfWidth 0.3, TargetType=Button}"/>
                         </OnPlatform>
                     </Button.WidthRequest>
                 </Button>
@@ -125,8 +125,8 @@
                     Clicked="DeleteShiftBtn_Clicked">
                     <Button.WidthRequest>
                         <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="{im:PercentOfWidth 0.2, TargetType=Button}"/>
-                            <On Platform="iOS" Value="{im:PercentOfWidth 0.2, TargetType=Button}"/>
+                            <On Platform="Android" Value="{im:PercentOfWidth 0.3, TargetType=Button}"/>
+                            <On Platform="iOS" Value="{im:PercentOfWidth 0.3, TargetType=Button}"/>
                         </OnPlatform>
                     </Button.WidthRequest>
                 </Button>

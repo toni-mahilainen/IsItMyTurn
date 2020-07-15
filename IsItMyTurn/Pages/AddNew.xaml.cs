@@ -71,24 +71,24 @@ namespace IsItMyTurn
                     // 201 - A shift has added successfully. Some problems with notifications
                     if (status == 200)
                     {
-                        await DisplayAlert("Is It My Turn", "Vuoron lisäys onnistui!", "OK");
+                        await DisplayAlert("Is It My Turn", "Kirjauksen lisäys onnistui!", "OK");
                         await Navigation.PopToRootAsync();
                     }
                     else if (status == 201)
                     {
                         await DisplayAlert("Is It My Turn",
-                            "Vuoron lisäys onnistui, mutta ilmoitusten lähettämisessä käyttäjille ilmeni ongelmia.\r\n\r\n" +
+                            "Kirjauksen lisäys onnistui, mutta ilmoitusten lähettämisessä käyttäjille ilmeni ongelmia.\r\n\r\n" +
                             "Käytä WhatsApp-ryhmää vuoron vaihdon ilmoittamiseen ja ota yhteyttä sovelluksen ylläpitäjään.", "OK");
                         await Navigation.PopToRootAsync();
                     }
                     else
                     {
-                        await DisplayAlert("Is It My Turn", "Tapahtui virhe lisätessä vuoroa. Ole hyvä ja yritä uudelleen.\r\nJos ongelma ei poistu, ota yhteyttä sovelluksen ylläpitäjään.", "OK");
+                        await DisplayAlert("Is It My Turn", "Tapahtui virhe lisätessä kirjausta. Ole hyvä ja yritä uudelleen.\r\nJos ongelma ei poistu, ota yhteyttä sovelluksen ylläpitäjään.", "OK");
                     }
                 }
                 else
                 {
-                    await DisplayAlert("Is It My Turn", "Tapahtui virhe lisätessä vuoroa. Ole hyvä ja yritä uudelleen.\r\nJos ongelma ei poistu, ota yhteyttä sovelluksen ylläpitäjään.", "OK");
+                    await DisplayAlert("Is It My Turn", "Tapahtui virhe lisätessä kirjausta. Ole hyvä ja yritä uudelleen.\r\nJos ongelma ei poistu, ota yhteyttä sovelluksen ylläpitäjään.", "OK");
                 }
             }
             catch (Exception ex)

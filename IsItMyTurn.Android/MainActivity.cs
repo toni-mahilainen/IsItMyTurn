@@ -20,7 +20,7 @@ namespace IsItMyTurn.Droid
     public class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
-        {
+        {   
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -28,10 +28,20 @@ namespace IsItMyTurn.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            // Density i.e., pixels per inch or cms  
+            var scale = Resources.DisplayMetrics.Density;
+            // Display width in pixels  
+            var widthInPixels = Resources.DisplayMetrics.WidthPixels;
+            //Display height in pixels  
+            var heightInPixels = Resources.DisplayMetrics.HeightPixels;
+            // Display width in units  
+            double widthInUnits = ((widthInPixels - 0.5f) / scale);
+            // Display height in units  
+            double heightInUnits = ((heightInPixels - 0.5f) / scale);
 
             // Initialize app for Firebase
             FirebaseApp.InitializeApp(this);
-            LoadApplication(new App());
+            LoadApplication(new App(heightInUnits, widthInUnits));
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

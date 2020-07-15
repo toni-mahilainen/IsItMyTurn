@@ -98,10 +98,10 @@ namespace IsItMyTurn.iOS
             Messaging.SharedInstance.ApnsToken = deviceToken;
         }
 
-        //public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
-        //{
-        //    FailedToRegisterForRemoteNotifications(application, error);
-        //}
+        public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
+        {
+            FailedToRegisterForRemoteNotifications(application, error);
+        }
 
         public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
         {

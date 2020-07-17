@@ -33,7 +33,7 @@ namespace IsItMyTurn.iOS
         {
             Xamarin.Forms.Forms.Init();
 
-            // Display height in units  
+            // Display height in units
             double displayHeight = UIScreen.MainScreen.Bounds.Height;
             // Display width in units
             double displayWidth = UIScreen.MainScreen.Bounds.Width;

@@ -16,7 +16,7 @@ using Java.Lang;
 
 namespace IsItMyTurn.Droid
 {
-    [Activity(Label = "IsItMyTurn", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "Is It My Turn", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -42,6 +42,7 @@ namespace IsItMyTurn.Droid
             // Initialize app for Firebase
             FirebaseApp.InitializeApp(this);
             LoadApplication(new App(heightInUnits, widthInUnits));
+            Window.SetStatusBarColor(Android.Graphics.Color.Rgb(0, 100, 0));
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

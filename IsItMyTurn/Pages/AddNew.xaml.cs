@@ -53,10 +53,14 @@ namespace IsItMyTurn
                 {
                     Apartment item = (Apartment)ApartmentPicker.SelectedItem;
 
+                    // Kind property for datetime
+                    // When the user does not change the date, the kind property is local as default -> the date will be wrong when it´s sent to backend in Azure
+                    var unspecifiedDate = new DateTime(DatePicker.Date.Ticks, DateTimeKind.Unspecified);
+
                     NewShift newShift = new NewShift()
                     {
                         ApartmentId = item.ApartmentId,
-                        Date = DatePicker.Date
+                        Date = unspecifiedDate
                     };
 
                     string json = JsonConvert.SerializeObject(newShift);

@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:im="clr-namespace:IsItMyTurn.Extensions"
              xmlns:icr="clr-namespace:IsItMyTurn.CustomRenderers"
+             xmlns:system="clr-namespace:System;assembly=netstandard"
              mc:Ignorable="d"
              x:Class="IsItMyTurn.AddNew">
     <AbsoluteLayout>

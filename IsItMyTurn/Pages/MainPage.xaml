@@ -60,8 +60,8 @@
                     IsVisible="False">
                     <Label.FontSize>
                         <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="{im:PercentOfHeight 0.12, TargetType=Label}" />
-                            <On Platform="iOS" Value="{im:PercentOfHeight 0.105, TargetType=Label}" />
+                            <On Platform="Android" Value="{im:PercentOfHeight 0.09, TargetType=Label}" />
+                            <On Platform="iOS" Value="{im:PercentOfHeight 0.09, TargetType=Label}" />
                         </OnPlatform>
                     </Label.FontSize>
                 </Label>

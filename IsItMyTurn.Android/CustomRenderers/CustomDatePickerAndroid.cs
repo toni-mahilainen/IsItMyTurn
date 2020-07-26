@@ -29,6 +29,7 @@ namespace IsItMyTurn.Droid.CustomRenderers
 
             if (e.OldElement == null)
             {
+                // Properties to custom date picker
                 GradientDrawable gradientDrawable = new GradientDrawable();
                 gradientDrawable.SetCornerRadius(10f);
                 gradientDrawable.SetColor(Android.Graphics.Color.Black);

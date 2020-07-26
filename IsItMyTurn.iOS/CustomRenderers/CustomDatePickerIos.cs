@@ -21,6 +21,7 @@ namespace IsItMyTurn.iOS.CustomRenderers
 
             if (e.OldElement == null)
             {
+                // Properties to custom date picker
                 Control.Layer.CornerRadius = 15;
                 Control.Layer.BackgroundColor = Color.Black.ToCGColor();
                 Control.Layer.Opacity = 0.6f;

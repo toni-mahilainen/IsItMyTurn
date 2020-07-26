@@ -4,5 +4,7 @@
 <dict>
 	<key>aps-environment</key>
 	<string>development</string>
+	<key>keychain-access-groups</key>	
+	<string>7M6742JGD4.com.companyname.IsItMyTurn</string>
 </dict>
 </plist>

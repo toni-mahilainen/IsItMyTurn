@@ -11,6 +11,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using IsItMyTurn.Models;
 using Security;
+using CoreFoundation;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
+using Microsoft.AppCenter.Crashes;
 
 namespace IsItMyTurn.iOS
 {
@@ -37,29 +41,20 @@ namespace IsItMyTurn.iOS
             double displayHeight = UIScreen.MainScreen.Bounds.Height;
             // Display width in units
             double displayWidth = UIScreen.MainScreen.Bounds.Width;
-
             // Initialize app for Firebase
             Firebase.Core.App.Configure();
-            RegisterForRemoteNotifications();
             LoadApplication(new App(displayHeight, displayWidth));
+            RegisterForRemoteNotifications();
+
+            //// For iOS 10 display notification(sent via APNS)
+            //var authOptions = UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound;
+            //UNUserNotificationCenter.Current.RequestAuthorizationAsync(authOptions);
+
+            //UNUserNotificationCenter.Current.Delegate = this;
+            //// For iOS 10 display notification (sent via APNS)
+            //UIApplication.SharedApplication.RegisterForRemoteNotifications();
 
             Messaging.SharedInstance.Delegate = this;
-
-            // Check iOS version for notification settings
-            if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
-            {
-                var pushSettings = UIUserNotificationSettings.GetSettingsForTypes(
-                                   UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
-                                   new NSSet());
-
-                UIApplication.SharedApplication.RegisterUserNotificationSettings(pushSettings);
-                UIApplication.SharedApplication.RegisterForRemoteNotifications();
-            }
-            else
-            {
-                UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound;
-                UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(notificationTypes);
-            }
 
             if (UNUserNotificationCenter.Current != null)
             {

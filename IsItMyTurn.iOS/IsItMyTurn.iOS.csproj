@@ -62,9 +62,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignKey>iPhone Developer</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>Ad-Hoc IsItMyTurn</CodesignProvision>
+    <CodesignProvision>VS: com.companyname.IsItMyTurn Development</CodesignProvision>
     <MtouchLink>None</MtouchLink>
     <BuildIpa>true</BuildIpa>
     <IpaPackageName>IsItMyTurn</IpaPackageName>
@@ -125,6 +125,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.AppCenter.Push">
       <Version>3.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.Permissions">
+      <Version>6.0.1</Version>
     </PackageReference>
     <PackageReference Include="System.Net.Http">
       <Version>4.3.4</Version>

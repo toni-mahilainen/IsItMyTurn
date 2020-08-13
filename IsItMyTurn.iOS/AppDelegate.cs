@@ -93,10 +93,10 @@ namespace IsItMyTurn.iOS
             Messaging.SharedInstance.ApnsToken = deviceToken;
         }
 
-        public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
-        {
-            FailedToRegisterForRemoteNotifications(application, error);
-        }
+        //public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
+        //{
+        //    FailedToRegisterForRemoteNotifications(application, error);
+        //}
 
         public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
         {
@@ -180,11 +180,11 @@ namespace IsItMyTurn.iOS
             query.Account = "UniqueID";
 
             NSData uniqueId = SecKeyChain.QueryAsData(query);
-            // Get it hashed
-            var hashedId = GetSha256HashForId(uniqueId.ToString());
-
+            
             if (uniqueId != null)
             {
+                // Get it hashed
+                var hashedId = GetSha256HashForId(uniqueId.ToString());
                 return hashedId;
             }
             else
@@ -193,8 +193,9 @@ namespace IsItMyTurn.iOS
                 var err = SecKeyChain.Add(query);
                 if (err != SecStatusCode.Success && err != SecStatusCode.DuplicateItem)
                     throw new Exception("Cannot store Unique ID");
+                var hashedValueData = GetSha256HashForId(query.ValueData.ToString());
 
-                return query.ValueData.ToString();
+                return hashedValueData;
             }
         }
 

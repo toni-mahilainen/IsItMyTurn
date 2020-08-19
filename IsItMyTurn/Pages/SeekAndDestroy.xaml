@@ -3,21 +3,135 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:im="clr-namespace:IsItMyTurn.Extensions"
              mc:Ignorable="d"
              x:Class="IsItMyTurn.Pages.SeekAndDestroy">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label 
-                Text="Is It My Turn"
-                FontSize="Title"
-                BackgroundColor="Beige"
-                HeightRequest="75"
-                VerticalTextAlignment="Center"
-                HorizontalTextAlignment="Center"
-                HorizontalOptions="FillAndExpand"/>
-            <Label Text="Seek and destroy page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+    <AbsoluteLayout>
+        <Image Source="background.jpg" Aspect="Fill"/>
+        <Image 
+            AbsoluteLayout.LayoutBounds="0.5, 0.04, 0.55, 39"
+            AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+            Source="logo.png"
+            Aspect="AspectFill">
+        </Image>
+        <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0, 0.8, 0.98" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Fill">
+                <Button 
+                    x:Name="AddNewBtn"
+                    Text="Lisää uusi"
+                    TextColor="White"
+                    BackgroundColor="Black"
+                    BorderColor="White"
+                    BorderWidth="3"
+                    CornerRadius="15"
+                    Opacity=".7"
+                    Clicked="AddNewBtn_Clicked"/>
+                <Button
+                    x:Name="ToMainPageBtn"
+                    Text="Takaisin etusivulle"
+                    TextColor="White"
+                    BackgroundColor="Black"
+                    BorderColor="White"
+                    BorderWidth="3"
+                    CornerRadius="15"
+                    Opacity=".7"
+                    Clicked="ToMainPageBtn_Clicked"/>
+            </StackLayout>
         </StackLayout>
-    </ContentPage.Content>
+        <Label 
+            Text="Kirjausten selaus/poisto"
+            TextColor="White"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            AbsoluteLayout.LayoutBounds="0.5, 0.12, 1, 0.1"
+            AbsoluteLayout.LayoutFlags="All">
+            <Label.FontSize>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="Android" Value="{im:NamedSize Large, TargetType=Label}" />
+                    <On Platform="iOS" Value="{im:NamedSize Large, TargetType=Label}" />
+                </OnPlatform>
+            </Label.FontSize>
+        </Label>
+        <StackLayout 
+            AbsoluteLayout.LayoutBounds="0.5, 0.51, 1, 0.55" 
+            AbsoluteLayout.LayoutFlags="All">
+            <Label 
+                Text="Tehdyt kirjaukset"
+                TextColor="White"
+                Margin="10,0,10,0"
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center">
+                <Label.FontSize>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android" Value="{im:NamedSize Medium, TargetType=Label}" />
+                        <On Platform="iOS" Value="{im:NamedSize Body, TargetType=Label}" />
+                    </OnPlatform>
+                </Label.FontSize>
+            </Label>
+            <Frame
+                HorizontalOptions="Center"
+                BackgroundColor="Black" 
+                Opacity="0.5"
+                CornerRadius="15"
+                Margin="5,0,5,0"
+                Padding="5">
+                <ListView 
+                    x:Name="listView" 
+                    SeparatorColor="White" 
+                    ItemTapped="listView_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell
+                                x:Name="ShiftCell"
+                                TextColor="White"
+                                DetailColor="White"
+                                Text="{Binding ApartmentName, StringFormat='Asunto: {0}'}" 
+                                Detail="{Binding DateStr, StringFormat='Leikkuu ajankohta: {0}'}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+            <StackLayout Orientation="Horizontal" Margin="10,0,10,10">
+                <Button 
+                    x:Name="EditShiftBtn"
+                    Text="Muokkaa"
+                    TextColor="White"
+                    BackgroundColor="Black"
+                    BorderColor="White"
+                    BorderWidth="3"
+                    CornerRadius="15"
+                    Opacity=".7"
+                    HorizontalOptions="StartAndExpand"
+                    IsEnabled="False"
+                    Clicked="EditShiftBtn_Clicked">
+                    <Button.WidthRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="{im:PercentOfWidth 0.3, TargetType=Button}"/>
+                            <On Platform="iOS" Value="{im:PercentOfWidth 0.3, TargetType=Button}"/>
+                        </OnPlatform>
+                    </Button.WidthRequest>
+                </Button>
+                <Button
+                    x:Name="DeleteShiftBtn"
+                    Text="Poista"
+                    TextColor="White"
+                    BackgroundColor="Black"
+                    BorderColor="White"
+                    BorderWidth="3"
+                    CornerRadius="15"
+                    Opacity=".7"
+                    HorizontalOptions="EndAndExpand"
+                    IsEnabled="False"
+                    Clicked="DeleteShiftBtn_Clicked">
+                    <Button.WidthRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="{im:PercentOfWidth 0.3, TargetType=Button}"/>
+                            <On Platform="iOS" Value="{im:PercentOfWidth 0.3, TargetType=Button}"/>
+                        </OnPlatform>
+                    </Button.WidthRequest>
+                </Button>
+            </StackLayout>
+        </StackLayout>
+
+    </AbsoluteLayout>
 </ContentPage>

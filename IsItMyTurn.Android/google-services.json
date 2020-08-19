@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1088232759850",
+    "firebase_url": "https://is-it-my-turn.firebaseio.com",
+    "project_id": "is-it-my-turn",
+    "storage_bucket": "is-it-my-turn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088232759850:android:793cbf2065441ee9265953",
+        "android_client_info": {
+          "package_name": "com.companyname.isitmyturn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088232759850-jsu1v3uvhrc909l621unqe4dbmvd0mi9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyiEWeDLqEZSx9LkF0yBC-pkcVri38boQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088232759850-jsu1v3uvhrc909l621unqe4dbmvd0mi9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

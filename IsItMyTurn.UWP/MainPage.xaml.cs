@@ -21,7 +21,7 @@ namespace IsItMyTurn.UWP
         {
             this.InitializeComponent();
 
-            LoadApplication(new IsItMyTurn.App());
+            //LoadApplication(new IsItMyTurn.App());
         }
     }
 }

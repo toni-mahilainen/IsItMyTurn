@@ -3,32 +3,118 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:im="clr-namespace:IsItMyTurn.Extensions"
              mc:Ignorable="d"
              x:Class="IsItMyTurn.MainPage">
-
-    <StackLayout>
-        <Label 
-            Text="Is It My Turn"
-            FontSize="Title"
-            BackgroundColor="Beige"
-            HeightRequest="75"
-            VerticalTextAlignment="Center"
-            HorizontalTextAlignment="Center"
-            HorizontalOptions="FillAndExpand"/>
-        <Label 
-            x:Name="CurrentShiftLbl"
-            Text="B2"
-            FontSize="Header"
-            HorizontalOptions="Center" 
-            VerticalOptions="CenterAndExpand"/>
+    <AbsoluteLayout>
+        <Image Source="background.jpg" Aspect="Fill"/>
+        <Image 
+            AbsoluteLayout.LayoutBounds="0.5, 0.04, 0.55, 39"
+            AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+            Source="logo.png"
+            Aspect="AspectFill">
+        </Image>
+        <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.15, 1, 0.2" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <Label 
+                    Text="Leikkuuvuorossa"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    HorizontalTextAlignment="Center"
+                    HorizontalOptions="Center">
+                    <Label.FontSize>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="{im:NamedSize Large, TargetType=Label}" />
+                            <On Platform="iOS" Value="{im:NamedSize Subtitle, TargetType=Label}" />
+                        </OnPlatform>
+                    </Label.FontSize>
+                </Label>
+                <Frame
+                    x:Name="LoadingLblFrame"
+                    HorizontalOptions="Center"
+                    BackgroundColor="Black" 
+                    Opacity="0.5"
+                    CornerRadius="15"
+                    Padding="10"
+                    Margin="5"
+                    IsVisible="True">
+                    <Label 
+                        x:Name="LoadingLbl"
+                        Text="Ladataan..."
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        IsVisible="True">
+                        <Label.FontSize>
+                            <OnPlatform x:TypeArguments="x:Double">
+                                <On Platform="Android" Value="{im:PercentOfHeight 0.03, TargetType=Label}" />
+                                <On Platform="iOS" Value="{im:PercentOfHeight 0.03, TargetType=Label}" />
+                            </OnPlatform>
+                        </Label.FontSize>
+                    </Label>
+                </Frame>
+                <Label 
+                    x:Name="CurrentShiftLbl"
+                    TextColor="White"
+                    HorizontalOptions="Center"
+                    IsVisible="False">
+                    <Label.FontSize>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="{im:PercentOfHeight 0.09, TargetType=Label}" />
+                            <On Platform="iOS" Value="{im:PercentOfHeight 0.09, TargetType=Label}" />
+                        </OnPlatform>
+                    </Label.FontSize>
+                </Label>
+            </StackLayout>
+        </StackLayout>
+        <Button 
+            x:Name="RefreshBtn" 
+            Text="Päivitä" 
+            TextColor="White"
+            BackgroundColor="Black"
+            BorderColor="White"
+            BorderWidth="3"
+            CornerRadius="15"
+            Opacity=".7"
+            AbsoluteLayout.LayoutBounds="0.5, 0.42, 0.3, 0.07"
+            AbsoluteLayout.LayoutFlags="All"
+            Clicked="RefreshBtn_Clicked" />
         <Button 
             x:Name="AddNewBtn" 
             Text="Lisää uusi" 
+            TextColor="White"
+            BackgroundColor="Black"
+            BorderColor="White"
+            BorderWidth="3"
+            CornerRadius="20"
+            Opacity=".7"
+            AbsoluteLayout.LayoutBounds="0.5, 0.65, 0.37, 0.1"
+            AbsoluteLayout.LayoutFlags="All"
             Clicked="AddNewBtn_Clicked"/>
-        <Button 
+        <Button
             x:Name="SeekAndDestroyBtn" 
-            Text="Selaa / Poista" 
+            Text="Selaa / Poista"
+            TextColor="White"
+            BackgroundColor="Black"
+            BorderColor="White"
+            BorderWidth="3"
+            CornerRadius="20"
+            Opacity=".7"
+            AbsoluteLayout.LayoutBounds="0.5, 0.85, 0.37, 0.1"
+            AbsoluteLayout.LayoutFlags="All"
             Clicked="SeekAndDestroyBtn_Clicked"/>
-    </StackLayout>
-
+        <Label 
+            TextColor="White"
+            Text="Developed by Toni Mahilainen"
+            HorizontalTextAlignment="Center"
+            AbsoluteLayout.LayoutBounds="0.5, 1, 1, 0.04"
+            AbsoluteLayout.LayoutFlags="All">
+            <Label.FontSize>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="Android" Value="{im:NamedSize Small, TargetType=Label}" />
+                    <On Platform="iOS" Value="{im:NamedSize Small, TargetType=Label}" />
+                </OnPlatform>
+            </Label.FontSize>
+        </Label>
+    </AbsoluteLayout>
 </ContentPage>

@@ -3,61 +3,149 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:im="clr-namespace:IsItMyTurn.Extensions"
+             xmlns:icr="clr-namespace:IsItMyTurn.CustomRenderers"
+             xmlns:system="clr-namespace:System;assembly=netstandard"
              mc:Ignorable="d"
              x:Class="IsItMyTurn.AddNew">
-    <ContentPage.Content>
-        
-        <StackLayout>
+    <AbsoluteLayout>
+        <Image Source="background.jpg" Aspect="Fill"/>
+        <Image 
+            AbsoluteLayout.LayoutBounds="0.5, 0.04, 0.55, 39"
+            AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+            Source="logo.png"
+            Aspect="AspectFill">
+        </Image>
+        <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0, 1, 0.95" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="Fill">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button 
+                        x:Name="AddBtn"
+                        Text="Lisää"
+                        TextColor="White"
+                        BackgroundColor="Black"
+                        BorderColor="White"
+                        BorderWidth="3"
+                        CornerRadius="15"
+                        Opacity=".7"
+                        Clicked="AddBtn_Clicked">
+                        <Button.WidthRequest>
+                            <OnPlatform x:TypeArguments="x:Double">
+                                <On Platform="Android" Value="{im:PercentOfWidth 0.4, TargetType=Button}"/>
+                                <On Platform="iOS" Value="{im:PercentOfWidth 0.4, TargetType=Button}"/>
+                            </OnPlatform>
+                        </Button.WidthRequest>
+                    </Button>
+                    <Button
+                        x:Name="CancelBtn"
+                        Text="Peruuta"
+                        TextColor="White"
+                        BackgroundColor="Black"
+                        BorderColor="White"
+                        BorderWidth="3"
+                        CornerRadius="15"
+                        Opacity=".7"
+                        Clicked="CancelBtn_Clicked">
+                        <Button.WidthRequest>
+                            <OnPlatform x:TypeArguments="x:Double">
+                                <On Platform="Android" Value="{im:PercentOfWidth 0.4, TargetType=Button}"/>
+                                <On Platform="iOS" Value="{im:PercentOfWidth 0.4, TargetType=Button}"/>
+                            </OnPlatform>
+                        </Button.WidthRequest>
+                    </Button>
+                </StackLayout>
+                <Button
+                    x:Name="ToMainPageBtn"
+                    Text="Takaisin etusivulle"
+                    TextColor="White"
+                    BackgroundColor="Black"
+                    BorderColor="White"
+                    BorderWidth="3"
+                    CornerRadius="15"
+                    Opacity=".7"
+                    HorizontalOptions="Center"
+                    Clicked="ToMainPageBtn_Clicked">
+                    <Button.WidthRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="{im:PercentOfWidth 0.8, TargetType=Button}"/>
+                            <On Platform="iOS" Value="{im:PercentOfWidth 0.8, TargetType=Button}"/>
+                        </OnPlatform>
+                    </Button.WidthRequest>
+                </Button>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.22, 1, 0.5" AbsoluteLayout.LayoutFlags="All">
             <Label 
-                Text="Is It My Turn"
-                FontSize="Title"
-                BackgroundColor="Beige"
-                HeightRequest="75"
-                VerticalTextAlignment="Center"
+                Text="Uuden kirjauksen lisäys"
+                TextColor="White"
                 HorizontalTextAlignment="Center"
-                HorizontalOptions="FillAndExpand"/>
-            <Label 
-                Text="Tehdyn leikkuun lisäys"
-                FontSize="Title"
                 VerticalOptions="Center" 
                 HorizontalOptions="CenterAndExpand"
-                Padding="20"/>
-            <StackLayout VerticalOptions="StartAndExpand">
-                <Label 
-                    Text="Valitse leikkuun suorittanut asunto"
-                    FontSize="Large"
-                    HorizontalOptions="CenterAndExpand"/>
-                <Picker 
-                    x:Name="ApartmentPicker" 
-                    Title="Valitse asunto"
-                    HorizontalOptions="Center"
-                    ItemsSource="{Binding ApartmentList}"
-                    ItemDisplayBinding="{Binding ApartmentName}"
-                    SelectedItem="{Binding SelectedItem}"/>
-                <Label 
-                    Text="Valitse suoritetun leikkuun ajankohta"
-                    FontSize="Large"
-                    HorizontalOptions="CenterAndExpand"/>
-                <DatePicker 
-                    x:Name="DatePicker"
-                    HorizontalOptions="Center"/>
-            </StackLayout>
-            <Button 
-                Text="Lisää"
-                x:Name="AddBtn"
-                VerticalOptions="End"
-                Clicked="AddBtn_Clicked"/>
-            <Button
-                Text="Peruuta"
-                x:Name="CancelBtn"
-                VerticalOptions="End"
-                Clicked="CancelBtn_Clicked"/>
-            <Button
-                Text="Takaisin etusivulle"
-                x:Name="ToMainPageBtn"
-                VerticalOptions="End"
-                Clicked="ToMainPageBtn_Clicked"/>
+                Padding="30">
+                <Label.FontSize>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android" Value="{im:NamedSize Large, TargetType=Label}" />
+                        <On Platform="iOS" Value="{im:NamedSize Large, TargetType=Label}" />
+                    </OnPlatform>
+                </Label.FontSize>
+            </Label>
+            <Label 
+                Text="Valitse leikkuun suorittanut asunto"
+                FontAttributes="Bold"
+                TextColor="White"
+                HorizontalTextAlignment="Center"
+                HorizontalOptions="Center">
+                <Label.FontSize>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android" Value="{im:NamedSize Medium, TargetType=Label}" />
+                        <On Platform="iOS" Value="{im:NamedSize Medium, TargetType=Label}" />
+                    </OnPlatform>
+                </Label.FontSize>
+            </Label>
+            <icr:CustomPicker 
+                x:Name="ApartmentPicker"
+                Title="Valitse asunto"
+                TitleColor="White"
+                TextColor="White"
+                HorizontalOptions="Center"
+                Margin="5"
+                ItemsSource="{Binding ApartmentList}"
+                ItemDisplayBinding="{Binding ApartmentName}"
+                SelectedItem="{Binding SelectedItem}">
+                <icr:CustomPicker.FontAttributes>
+                    <OnPlatform x:TypeArguments="FontAttributes">
+                        <On Platform="Android" Value="None"/>
+                        <On Platform="iOS" Value="Bold"/>
+                    </OnPlatform>
+                </icr:CustomPicker.FontAttributes>
+            </icr:CustomPicker>
+            <Label 
+                Text="Valitse suoritetun leikkuun ajankohta"
+                FontAttributes="Bold"
+                TextColor="White"
+                HorizontalTextAlignment="Center"
+                HorizontalOptions="Center">
+                <Label.FontSize>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android" Value="{im:NamedSize Medium, TargetType=Label}" />
+                        <On Platform="iOS" Value="{im:NamedSize Medium, TargetType=Label}" />
+                    </OnPlatform>
+                </Label.FontSize>
+            </Label>
+            <icr:CustomDatePicker
+                x:Name="DatePicker"
+                TextColor="White"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Margin="5"
+                WidthRequest="130">
+                <icr:CustomDatePicker.FontAttributes>
+                    <OnPlatform x:TypeArguments="FontAttributes">
+                        <On Platform="Android" Value="None"/>
+                        <On Platform="iOS" Value="Bold"/>
+                    </OnPlatform>
+                </icr:CustomDatePicker.FontAttributes>
+            </icr:CustomDatePicker>
         </StackLayout>
-        
-    </ContentPage.Content>
+    </AbsoluteLayout>
 </ContentPage>

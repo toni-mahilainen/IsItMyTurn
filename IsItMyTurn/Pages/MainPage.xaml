@@ -3,37 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:im="clr-namespace:IsItMyTurn.Models"
+             xmlns:im="clr-namespace:IsItMyTurn.Extensions"
              mc:Ignorable="d"
              x:Class="IsItMyTurn.MainPage">
     <AbsoluteLayout>
         <Image Source="background.jpg" Aspect="Fill"/>
-        <Label 
-            x:Name="AppNameLbl"
-            Text="Is It My Turn"
-            FontAttributes="Bold"
-            TextColor="White"
-            HorizontalTextAlignment="Center"
-            VerticalTextAlignment="Center"
-            AbsoluteLayout.LayoutBounds="0.5, 0.01, 1, 0.1"
-            AbsoluteLayout.LayoutFlags="All">
-            <Label.FontSize>
-                <OnPlatform x:TypeArguments="x:Double">
-                    <On Platform="Android" Value="{im:NamedSize Title, TargetType=Label}" />
-                    <On Platform="iOS" Value="{im:NamedSize Title, TargetType=Label}" />
-                </OnPlatform>
-            </Label.FontSize>
-        </Label>
+        <Image 
+            AbsoluteLayout.LayoutBounds="0.5, 0.04, 0.55, 39"
+            AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+            Source="logo.png"
+            Aspect="AspectFill">
+        </Image>
         <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.15, 1, 0.2" AbsoluteLayout.LayoutFlags="All">
             <StackLayout VerticalOptions="CenterAndExpand">
                 <Label 
-                    Text="Leikkuuvuorossa:"
-                    FontSize="Title"
+                    Text="Leikkuuvuorossa"
                     FontAttributes="Bold"
                     TextColor="White"
+                    HorizontalTextAlignment="Center"
                     HorizontalOptions="Center">
-                    <!--AbsoluteLayout.LayoutBounds="0.5, 0.15, 1, 0.1"
-                    AbsoluteLayout.LayoutFlags="All">-->
                     <Label.FontSize>
                         <OnPlatform x:TypeArguments="x:Double">
                             <On Platform="Android" Value="{im:NamedSize Large, TargetType=Label}" />
@@ -41,17 +29,39 @@
                         </OnPlatform>
                     </Label.FontSize>
                 </Label>
+                <Frame
+                    x:Name="LoadingLblFrame"
+                    HorizontalOptions="Center"
+                    BackgroundColor="Black" 
+                    Opacity="0.5"
+                    CornerRadius="15"
+                    Padding="10"
+                    Margin="5"
+                    IsVisible="True">
+                    <Label 
+                        x:Name="LoadingLbl"
+                        Text="Ladataan..."
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        IsVisible="True">
+                        <Label.FontSize>
+                            <OnPlatform x:TypeArguments="x:Double">
+                                <On Platform="Android" Value="{im:PercentOfHeight 0.03, TargetType=Label}" />
+                                <On Platform="iOS" Value="{im:PercentOfHeight 0.03, TargetType=Label}" />
+                            </OnPlatform>
+                        </Label.FontSize>
+                    </Label>
+                </Frame>
                 <Label 
                     x:Name="CurrentShiftLbl"
-                    FontSize="Header"
                     TextColor="White"
-                    HorizontalOptions="Center">
-                            <!--AbsoluteLayout.LayoutBounds="0.5, 0.29, 1, 0.3"
-                    AbsoluteLayout.LayoutFlags="All">-->
+                    HorizontalOptions="Center"
+                    IsVisible="False">
                     <Label.FontSize>
                         <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="{im:TextSize 0.06, TargetType=Label}" />
-                            <On Platform="iOS" Value="{im:TextSize 0.05, TargetType=Label}" />
+                            <On Platform="Android" Value="{im:PercentOfHeight 0.09, TargetType=Label}" />
+                            <On Platform="iOS" Value="{im:PercentOfHeight 0.09, TargetType=Label}" />
                         </OnPlatform>
                     </Label.FontSize>
                 </Label>

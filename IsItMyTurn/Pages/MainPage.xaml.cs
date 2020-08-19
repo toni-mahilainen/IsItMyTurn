@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using UserNotifications;
 using Xamarin.Forms;
 
 namespace IsItMyTurn
@@ -19,13 +20,11 @@ namespace IsItMyTurn
         public MainPage()
         {
             InitializeComponent();
-
-            //AppNameLbl.FontSize = Device.RuntimePlatform == Device.iOS ? 24 :
-            //    Device.RuntimePlatform == Device.Android ? Device.GetNamedSize(NamedSize.Title, AppNameLbl) : Device.GetNamedSize(NamedSize.Title, AppNameLbl);
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
+            await Task.Delay(1000);
             GetApartmentForCurrentShift();
         }
 
@@ -38,6 +37,9 @@ namespace IsItMyTurn
             if (response.IsSuccessStatusCode)
             {
                 string responseBody = await response.Content.ReadAsStringAsync();
+                LoadingLbl.IsVisible = false;
+                LoadingLblFrame.IsVisible = false;
+                CurrentShiftLbl.IsVisible = true;
                 CurrentShiftLbl.Text = responseBody;
             }
         }

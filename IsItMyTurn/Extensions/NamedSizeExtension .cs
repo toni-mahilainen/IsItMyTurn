@@ -5,7 +5,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace IsItMyTurn.Models
+namespace IsItMyTurn.Extensions
 {
     [ContentProperty(nameof(NamedSize))]
     public class NamedSizeExtension : IMarkupExtension
@@ -18,20 +18,6 @@ namespace IsItMyTurn.Models
         public object ProvideValue(IServiceProvider serviceProvider)
         {
             return Device.GetNamedSize(NamedSize, TargetType);
-        }
-    }
-
-    [ContentProperty(nameof(Percent))]
-    public class TextSizeExtension : IMarkupExtension
-    {
-        public float Percent { get; set; }
-
-        [System.ComponentModel.TypeConverter(typeof(TypeTypeConverter))]
-        public Type TargetType { get; set; }
-
-        public object ProvideValue(IServiceProvider serviceProvider)
-        {
-            return DeviceDisplay.MainDisplayInfo.Height * Percent;
         }
     }
 }

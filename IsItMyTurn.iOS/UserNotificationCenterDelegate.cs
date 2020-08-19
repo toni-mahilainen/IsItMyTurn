@@ -9,11 +9,11 @@ using UserNotifications;
 
 namespace IsItMyTurn.iOS
 {
-    internal class UserNotificationCenterDelegate : UNUserNotificationCenterDelegate
+    public class UserNotificationCenterDelegate : UNUserNotificationCenterDelegate
     {
         public UserNotificationCenterDelegate()
         {
-
+            UNUserNotificationCenter.Current.Delegate = this;
         }
         public override void WillPresentNotification(UNUserNotificationCenter center, UNNotification notification, Action<UNNotificationPresentationOptions> completionHandler)
         {
@@ -21,7 +21,7 @@ namespace IsItMyTurn.iOS
             Console.WriteLine("Active Notification: {0}", notification);
             // Tell system to display the notification anyway or use
             // `None` to say we have handled the display locally.
-            completionHandler(UNNotificationPresentationOptions.Alert);
+            completionHandler.DynamicInvoke(UNNotificationPresentationOptions.Alert);
         }
     }
 }

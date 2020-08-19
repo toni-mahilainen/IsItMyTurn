@@ -11,6 +11,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using IsItMyTurn.Models;
 using Security;
+using CoreFoundation;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
+using Microsoft.AppCenter.Crashes;
 
 namespace IsItMyTurn.iOS
 {
@@ -32,26 +36,25 @@ namespace IsItMyTurn.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Xamarin.Forms.Forms.Init();
+
+            // Display height in units
+            double displayHeight = UIScreen.MainScreen.Bounds.Height;
+            // Display width in units
+            double displayWidth = UIScreen.MainScreen.Bounds.Width;
+            // Initialize app for Firebase
             Firebase.Core.App.Configure();
+            LoadApplication(new App(displayHeight, displayWidth));
             RegisterForRemoteNotifications();
-            LoadApplication(new App());
+
+            //// For iOS 10 display notification(sent via APNS)
+            //var authOptions = UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound;
+            //UNUserNotificationCenter.Current.RequestAuthorizationAsync(authOptions);
+
+            //UNUserNotificationCenter.Current.Delegate = this;
+            //// For iOS 10 display notification (sent via APNS)
+            //UIApplication.SharedApplication.RegisterForRemoteNotifications();
+
             Messaging.SharedInstance.Delegate = this;
-
-            // Check iOS version for notification settings
-            if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
-            {
-                var pushSettings = UIUserNotificationSettings.GetSettingsForTypes(
-                                   UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
-                                   new NSSet());
-
-                UIApplication.SharedApplication.RegisterUserNotificationSettings(pushSettings);
-                UIApplication.SharedApplication.RegisterForRemoteNotifications();
-            }
-            else
-            {
-                UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound;
-                UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(notificationTypes);
-            }
 
             if (UNUserNotificationCenter.Current != null)
             {
@@ -90,10 +93,10 @@ namespace IsItMyTurn.iOS
             Messaging.SharedInstance.ApnsToken = deviceToken;
         }
 
-        public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
-        {
-            FailedToRegisterForRemoteNotifications(application, error);
-        }
+        //public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
+        //{
+        //    FailedToRegisterForRemoteNotifications(application, error);
+        //}
 
         public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
         {
@@ -177,11 +180,11 @@ namespace IsItMyTurn.iOS
             query.Account = "UniqueID";
 
             NSData uniqueId = SecKeyChain.QueryAsData(query);
-            // Get it hashed
-            var hashedId = GetSha256HashForId(uniqueId.ToString());
-
+            
             if (uniqueId != null)
             {
+                // Get it hashed
+                var hashedId = GetSha256HashForId(uniqueId.ToString());
                 return hashedId;
             }
             else
@@ -190,8 +193,9 @@ namespace IsItMyTurn.iOS
                 var err = SecKeyChain.Add(query);
                 if (err != SecStatusCode.Success && err != SecStatusCode.DuplicateItem)
                     throw new Exception("Cannot store Unique ID");
+                var hashedValueData = GetSha256HashForId(query.ValueData.ToString());
 
-                return query.ValueData.ToString();
+                return hashedValueData;
             }
         }
 
